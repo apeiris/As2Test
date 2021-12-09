@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="As2Test.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="x12FileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\EDI</Value>
+    </Setting>
+    <Setting Name="ServiceName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OpenAS2Server</Value>
+    </Setting>
+    <Setting Name="configFilename" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">config\config.xml</Value>
+    </Setting>
+    <Setting Name="keyStoreFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">xxxx</Value>
+    </Setting>
+    <Setting Name="sqlSever" Type="System.String" Scope="User">
+      <Value Profile="(Default)">server=(local);user id=sa;password=2205;initial catalog=as2</Value>
+    </Setting>
+    <Setting Name="sender" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="receiver" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CertStorePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">testas2</Value>
+    </Setting>
+    <Setting Name="XPathToPartnerByName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//partner[@name=$'{txtPartnerName.Text}']</Value>
+    </Setting>
+    <Setting Name="partnerNodeSelecter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">name</Value>
+    </Setting>
+    <Setting Name="parntershipNodeSelector" Type="System.String" Scope="User">
+      <Value Profile="(Default)">name</Value>
+    </Setting>
+    <Setting Name="configPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
