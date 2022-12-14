@@ -2,7 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="As2Test.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-<<<<<<< HEAD
     <Setting Name="x12FileName" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\EDI</Value>
     </Setting>
@@ -37,9 +36,6 @@
       <Value Profile="(Default)">name</Value>
     </Setting>
     <Setting Name="configPath" Type="System.String" Scope="User">
-=======
-    <Setting Name="sendFilePath" Type="System.String" Scope="User">
->>>>>>> 8386a1a0ba3eddac43332bc4b2e7a79ceca3ca8c
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
