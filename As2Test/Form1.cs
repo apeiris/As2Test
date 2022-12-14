@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-<<<<<<< HEAD
 
 using System.ServiceProcess;
 using System.Windows.Forms;
@@ -21,18 +20,11 @@ using Newtonsoft.Json.Linq;
 using System.Xml.XPath;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
-=======
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows.Forms;
-
->>>>>>> 8386a1a0ba3eddac43332bc4b2e7a79ceca3ca8c
 
 namespace As2Test
 {
     public partial class Form1 : Form
     {
-<<<<<<< HEAD
         IPAddress partner;
         public enum tabs
         {
@@ -58,13 +50,6 @@ namespace As2Test
         List<string> partnershipsList = null;
         List<string> partnersList = null;
         XDocument partnshipXDocument = null;
-=======
-        public static FileSystemWatcher fsw = null;
-        const string signCert = @"C:\OpenAS2Server\config\as2_certs.p12";
-       // const string receipientCertFile = @"C:\OpenAS2Server\config\partnera.cer";
-        const string receipientCertFile = @"C:\OpenAS2Server\config\as2_certs_p12.cer";
-
->>>>>>> 8386a1a0ba3eddac43332bc4b2e7a79ceca3ca8c
         public Form1()
         {
             InitializeComponent();
@@ -102,7 +87,7 @@ namespace As2Test
                 AS2homePath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(wmiS["PathName"].ToString()))).Split("\\bin")[0];
                 string configFileName = AS2homePath + "\\" + Properties.Settings.Default.configFilename;
                 AS2configPath = AS2homePath + "\\config";
-                Properties.Settings.Default.con
+          //     Properties.Settings.Default.con
 
             }
         }
