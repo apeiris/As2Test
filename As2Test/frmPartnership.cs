@@ -168,7 +168,7 @@ namespace As2Test
             */
             //  XElement xe = new XElement(this.partnershipXDoc);
             //XElement.Parse()
-
+            CreatePartnership(lblPartnership.Text);
             string s = this.partnershipXDoc.ToString();
             webView21.AllowExternalDrop = true;
            
