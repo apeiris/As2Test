@@ -12,7 +12,11 @@ namespace As2Test.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+<<<<<<< HEAD
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+=======
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+>>>>>>> 8386a1a0ba3eddac43332bc4b2e7a79ceca3ca8c
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,6 +29,7 @@ namespace As2Test.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+<<<<<<< HEAD
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\EDI")]
         public string x12FileName {
             get {
@@ -155,6 +160,15 @@ namespace As2Test.Properties {
             }
             set {
                 this["configPath"] = value;
+=======
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sendFilePath {
+            get {
+                return ((string)(this["sendFilePath"]));
+            }
+            set {
+                this["sendFilePath"] = value;
+>>>>>>> 8386a1a0ba3eddac43332bc4b2e7a79ceca3ca8c
             }
         }
     }
