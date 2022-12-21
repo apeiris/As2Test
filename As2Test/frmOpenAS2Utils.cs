@@ -86,7 +86,8 @@ namespace As2Test
                 AS2homePath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(wmiS["PathName"].ToString()))).Split("\\bin")[0];
                 string configFileName = AS2homePath + "\\" + Properties.Settings.Default.configFilename;
                 AS2configPath = AS2homePath + "\\config";
-             //   Properties.Settings.Default.con
+                Properties.Settings.Default.configPath = AS2configPath;
+                Properties.Settings.Default.Save();
 
             }
         }

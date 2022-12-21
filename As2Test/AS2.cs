@@ -26,12 +26,10 @@ namespace As2Test
         public static string DES3 = "3DES";
         public static string RC2 = "RC2";
     }
-
     public class AS2
     {
         X509Certificate2Collection storeCertifcates = new X509Certificate2Collection();
         const string MESSAGE_SEPARATOR = "\r\n\r\n";
-
         public AS2(string keyStoreFilename, string keyStorePassword)
         {
             Debug.WriteLine($"keyStore={keyStoreFilename}, password={keyStorePassword}");
@@ -79,7 +77,6 @@ namespace As2Test
             oRequestStream.Flush();
             oRequestStream.Close();
         }
-
         /// <summary>
         /// return a unique MIME style boundary
         /// this needs to be unique enought not to occur within the data
@@ -112,8 +109,6 @@ namespace As2Test
 
             return sOut;
         }
-
-
         /// <summary>
         /// Create a Message out of byte arrays (this makes more sense than the above method)
         /// </summary>

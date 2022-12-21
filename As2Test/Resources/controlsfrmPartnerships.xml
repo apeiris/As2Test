@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls for="partnership" panel="tlpDyna1">
+	<!--a=Align, font="(font.bold=1)" bold ,l= length of  -->
+	<!-- the f attribute may also be specified with group like f={style=b,size=20,color=red} -->
+	<c cell="(0:0(object=label)(align=left)(text=Sender)font=(bold=1)"/>
+	<c cell="(0:1)(object=label)(align=left)(text=${cmbPartnershipSender})(font=font.italic=1)(size=14)"/>
+	<c r="1" c="0" t="label" a="l" font="(font.bold=1)" text="reciver"/><c r="1" c="1" t="label" a="l" text="${cmbPartnershipReceiver}" font="(font.bold=1)(size=14)" />
+
+	<c r="2" c="0"  t="Label"	a="l" font="(font.bold=1)"	text="MDN Url:"   /><c r="2" c="1"  t="TextBox" a="l" font="(font.bold=1)"	text="http://myhost:3010"		l="150"	tag=""/>
+	<c r="3" c="0"  t="Label"	a="l" font="(font.bold=1)" text="AS2 Url" /><c r="3" c="1"  t="textbox"	a="l" font="(font.bold=1)" text="http://localhost:10080"		tag="as2_url" />
+	<c r="4" c="0"  t="label"	a="l" font="(font.bold=1)" text="Send MDN to" tag="as2_mdn_to"/><c r="4" c="1"  t="textbox"	a="l" font="(font.bold=1)" text="mapeiris@hotmail.com"		l="250"  />
+	<c r="5" c="0"  t="label"	a="l" font="(font.bold=1)" text="Signed receipt options:"	l="350" /><c r="5" c="1"  t="label"   a="l" f="n" text="Signed-receipt-protocol=optional, pkcs7-signature; signed-receipt-micalg=optional, $attribute.sign$" />
+	<!--
+            For an unsigned MDN use this value for as2_mdn_options:       value="none"
+        -->
+	<!--  For enabling ASYNC MDN uncomment this attribute and set this to the URL partner must send MDN back to.
+              Example below uses a property from the config.xml to facilitate centralised management of the URL
+            <attribute name="as2_receipt_option" value="$properties.as2_async_mdn_url$"/> 
+         -->
+	<c r="6" c="0" t="label" a="l" font="(font.bold=1)" text="Encryption"/>						<c r="6" c="1" t="label" a="l" text="3DES" />
+	<c r="7" c="0" t="label" a="l" font="(font.bold=1)" text="Sign"/>								<c r="7" c="1" t="label" a="l" text="SHA256" />
+	<c r="8" c="0" t="label" a="l" font="(font.bold=1)" text="Resend Max Re tries"/>				<c r="8" c="1" t="label" a="l" text="3" />
+	<c r="9" c="0" t="label" a="l" font="(font.bold=1)" text="Prevent canonicalization for mic" l="250"/>	<c r="9" c="1" t="label" a="l" text="false" />
+	<c r="10" c="0" t="label" a="l" font="(font.bold=1)" text="RenameDigest to old name"/>					<c r="10" c="1" t="label" a="l" text="false" />
+	<c r="11" c="0" t="label" a="l" font="(font.bold=1)" text="Remove CMS algorithm protection attribute"/> <c r="11" c="1" t="label" a="l" text="false" />	
+</controls>

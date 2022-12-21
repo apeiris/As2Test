@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
 using System.ComponentModel;
 
 namespace As2Test
 {
-  
-  public static partial class Extensions
+
+    public static partial class Extensions
     {
         public static DataTable ExecuteDataTable(this SqlCommand @this)
         {

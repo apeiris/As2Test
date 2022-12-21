@@ -86,6 +86,7 @@ namespace As2Test
             this.btnClearLog = new System.Windows.Forms.Button();
             this.lbxLog = new System.Windows.Forms.ListBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tbpSendRcv.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -166,6 +167,7 @@ namespace As2Test
             this.tableLayoutPanel3.Controls.Add(this.lbxPartnerTo, 8, 2);
             this.tableLayoutPanel3.Controls.Add(this.label8, 8, 1);
             this.tableLayoutPanel3.Controls.Add(this.label4, 7, 0);
+            this.tableLayoutPanel3.Controls.Add(this.textBox1, 6, 6);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -440,7 +442,7 @@ namespace As2Test
             this.tableLayoutPanel7.ColumnCount = 3;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.8982F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.1018F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel7.Controls.Add(this.btnPartnershipDelete, 2, 0);
             this.tableLayoutPanel7.Controls.Add(this.btnPartnershipModify, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.btnParnterShipAdd, 0, 0);
@@ -454,7 +456,7 @@ namespace As2Test
             // 
             // btnPartnershipDelete
             // 
-            this.btnPartnershipDelete.Location = new System.Drawing.Point(187, 3);
+            this.btnPartnershipDelete.Location = new System.Drawing.Point(186, 3);
             this.btnPartnershipDelete.Name = "btnPartnershipDelete";
             this.btnPartnershipDelete.Size = new System.Drawing.Size(78, 33);
             this.btnPartnershipDelete.TabIndex = 5;
@@ -463,7 +465,7 @@ namespace As2Test
             // 
             // btnPartnershipModify
             // 
-            this.btnPartnershipModify.Location = new System.Drawing.Point(97, 3);
+            this.btnPartnershipModify.Location = new System.Drawing.Point(96, 3);
             this.btnPartnershipModify.Name = "btnPartnershipModify";
             this.btnPartnershipModify.Size = new System.Drawing.Size(78, 33);
             this.btnPartnershipModify.TabIndex = 4;
@@ -786,6 +788,13 @@ namespace As2Test
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(396, 478);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -877,6 +886,7 @@ namespace As2Test
         private System.Windows.Forms.Button btnPartnershipDelete;
         private System.Windows.Forms.Button btnPartnershipModify;
         private System.Windows.Forms.Button btnParnterShipAdd;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
