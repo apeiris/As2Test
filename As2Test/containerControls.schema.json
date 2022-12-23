@@ -25,6 +25,7 @@
             "TextBox"
           ]
         },
+       
         "Font": {
           "$ref": "#/definitions/Font"
         },
@@ -33,8 +34,10 @@
         },
         "TextAlign": {
           "$ref": "#/definitions/TextAlign"
-        }
+        },
+        "PlaceholderText": { "type": "string" }
       }
+
     },
     "Font": {
       "type": "object",
