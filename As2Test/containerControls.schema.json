@@ -8,9 +8,6 @@
     "parent": {
       "type": "string"
     },
-    "type": {
-      "type": "string"
-    },
     "controls": {
       "type": "array",
       "items": {
@@ -32,11 +29,10 @@
           "$ref": "#/definitions/Cell"
         },
         "TextAlign": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
+          "$ref": "#/definitions/TextAlign"
         }
+
+
       }
     },
     "Font": {
@@ -52,6 +48,21 @@
           "type": "string"
         }
       }
+    },
+    "TextAlign": {
+      "enum": [
+        "Left",
+        "Right",
+        "TopLeft",
+        "TopCenter",
+        "TopRight",
+        "MiddleLeft",
+        "MiddleCenter",
+        "MiddleRight",
+        "BottomLeft",
+        "BottomCenter",
+        "BottomRight"
+      ]
     },
     "Cell": {
       "type": "object",

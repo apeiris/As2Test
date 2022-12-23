@@ -15,8 +15,22 @@
           "Row": 0,
           "Column": 0
         },
-        "TextAlign": "Left",
-        "type": "Label"
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "properties": {
+        "Type": "TextBox",
+        "Font": {
+          "Name": "consolas",
+          "Size": 10,
+          "Bold": "true"
+        },
+        "Cell": {
+          "Row": 0,
+          "Column": 0
+        },
+        "TextAlign": "Left"
       }
     }
   ]
