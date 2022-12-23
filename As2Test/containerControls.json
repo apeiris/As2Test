@@ -1,0 +1,23 @@
+{
+  "$schema": "./containerControls.schema.json",
+  "parent": "tlpDyna1",
+  "type": "TableLayoutPanel",
+  "controls": [
+    {
+      "properties": {
+        "Type": "Label",
+        "Font": {
+          "Name": "consolas",
+          "Size": 10,
+          "Bold": "true"
+        },
+        "Cell": {
+          "Row": 0,
+          "Column": 0
+        },
+        "TextAlign": "Left",
+        "type": "Label"
+      }
+    }
+  ]
+}

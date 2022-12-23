@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "parent": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Control"
+      }
+    }
+  },
+  "definitions": {
+    "Properties": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "enum": [ "Label", "TextBox" ]
+        },
+        "Font": {
+          "$ref": "#/definitions/Font"
+        },
+        "Cell": {
+          "$ref": "#/definitions/Cell"
+        },
+        "TextAlign": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Font": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "enum": [ "consolas", "arial" ]
+        },
+        "Size": {
+          "type": "integer"
+        },
+        "Bold": {
+          "type": "string"
+        }
+      }
+    },
+    "Cell": {
+      "type": "object",
+      "properties": {
+        "Row": {
+          "type": "integer"
+        },
+        "Column": {
+          "type": "integer"
+        }
+      }
+    },
+    "Control": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Properties"
+        }
+      }
+    }
+  }
+}
