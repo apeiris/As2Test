@@ -20,7 +20,10 @@
       "type": "object",
       "properties": {
         "Type": {
-          "enum": [ "Label", "TextBox" ]
+          "enum": [
+            "Label",
+            "TextBox"
+          ]
         },
         "Font": {
           "$ref": "#/definitions/Font"
@@ -37,7 +40,10 @@
       "type": "object",
       "properties": {
         "Name": {
-          "enum": [ "consolas", "arial" ]
+          "enum": [
+            "consolas",
+            "arial"
+          ]
         },
         "Size": {
           "type": "integer"
