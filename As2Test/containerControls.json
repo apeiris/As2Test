@@ -11,10 +11,32 @@
           "Size": 10,
           "Bold": "true"
         },
-        "Cell": {
-          "Row": 0,
-          "Column": 0
+        "Cell": {"Row": 0,"Column": 0},
+        "TextAlign": "Left" 
+      }
+    },
+    {
+      "properties": {
+        "Type": "TextBox",
+        "Font": {
+          "Name": "consolas",
+          "Size": 10,
+          "Bold": "true"
         },
+        "Cell": {"Row": 0,"Column": 1},
+        "TextAlign": "Left",
+        "PlaceholderText": "this"
+      }
+    },
+    {
+      "properties": {
+        "Type": "Label",
+        "Font": {
+          "Name": "consolas",
+          "Size": 10,
+          "Bold": "true"
+        },
+        "Cell": {"Row": 1,"Column": 0},
         "TextAlign": "Left"
       }
     },
@@ -26,12 +48,9 @@
           "Size": 10,
           "Bold": "true"
         },
-        "Cell": {
-          "Row": 0,
-          "Column": 0
-        },
+        "Cell": {"Row": 1,"Column": 1},
         "TextAlign": "Left"
-      }
+       }
     }
   ]
 }
