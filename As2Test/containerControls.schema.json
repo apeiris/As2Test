@@ -31,8 +31,6 @@
         "TextAlign": {
           "$ref": "#/definitions/TextAlign"
         }
-
-
       }
     },
     "Font": {
