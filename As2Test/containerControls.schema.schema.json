@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "controls": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "Font",
+                "Cell",
+                "TextAlign"
+              ]
+            }
+          },
+          "required": [
+            "control"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "PlaceholderText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "Font",
+                "Cell",
+                "TextAlign",
+                "PlaceholderText"
+              ]
+            }
+          },
+          "required": [
+            "control"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "controls"
+  ]
+}

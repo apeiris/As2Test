@@ -41,12 +41,16 @@
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnSavePartnership = new System.Windows.Forms.Button();
             this.tlpDyna1 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnTestJson = new System.Windows.Forms.Button();
+            this.btnGenerateSchema = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -55,16 +59,13 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 99.27007F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0.729927F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.311258F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.68874F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1096, 604);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -85,7 +86,7 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 2, 4);
             this.tableLayoutPanel2.Controls.Add(this.tlpDyna1, 0, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 22);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 38);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -104,7 +105,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1082, 579);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1082, 563);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label9
@@ -145,8 +146,9 @@
             // 
             // cmbPartnershipSender
             // 
+            this.cmbPartnershipSender.Dock = System.Windows.Forms.DockStyle.Right;
             this.cmbPartnershipSender.FormattingEnabled = true;
-            this.cmbPartnershipSender.Location = new System.Drawing.Point(3, 33);
+            this.cmbPartnershipSender.Location = new System.Drawing.Point(11, 33);
             this.cmbPartnershipSender.Name = "cmbPartnershipSender";
             this.cmbPartnershipSender.Size = new System.Drawing.Size(240, 23);
             this.cmbPartnershipSender.TabIndex = 2;
@@ -168,26 +170,26 @@
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.75F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.60331F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.39669F));
             this.tableLayoutPanel4.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.lblPartnership, 1, 0);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 63);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(242, 14);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(242, 23);
             this.tableLayoutPanel4.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 14);
+            this.label3.Size = new System.Drawing.Size(84, 23);
             this.label3.TabIndex = 4;
             this.label3.Text = "Partnership";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -197,12 +199,12 @@
             // lblPartnership
             // 
             this.lblPartnership.AutoSize = true;
-            this.lblPartnership.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPartnership.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPartnership.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblPartnership.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPartnership.Location = new System.Drawing.Point(90, 0);
+            this.lblPartnership.Location = new System.Drawing.Point(94, 0);
             this.lblPartnership.Name = "lblPartnership";
-            this.lblPartnership.Size = new System.Drawing.Size(147, 14);
+            this.lblPartnership.Size = new System.Drawing.Size(145, 23);
             this.lblPartnership.TabIndex = 5;
             this.lblPartnership.Text = "xxxxxxxxxxxxxxxxxxxx";
             this.lblPartnership.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -293,6 +295,35 @@
             this.tlpDyna1.Size = new System.Drawing.Size(223, 94);
             this.tlpDyna1.TabIndex = 14;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnTestJson);
+            this.flowLayoutPanel1.Controls.Add(this.btnGenerateSchema);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1081, 29);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // btnTestJson
+            // 
+            this.btnTestJson.Location = new System.Drawing.Point(3, 3);
+            this.btnTestJson.Name = "btnTestJson";
+            this.btnTestJson.Size = new System.Drawing.Size(74, 29);
+            this.btnTestJson.TabIndex = 1;
+            this.btnTestJson.Text = "Test Json";
+            this.btnTestJson.UseVisualStyleBackColor = true;
+            this.btnTestJson.Click += new System.EventHandler(this.btnTestJson_Click);
+            // 
+            // btnGenerateSchema
+            // 
+            this.btnGenerateSchema.Location = new System.Drawing.Point(83, 3);
+            this.btnGenerateSchema.Name = "btnGenerateSchema";
+            this.btnGenerateSchema.Size = new System.Drawing.Size(120, 29);
+            this.btnGenerateSchema.TabIndex = 2;
+            this.btnGenerateSchema.Text = "Generate Schema";
+            this.btnGenerateSchema.UseVisualStyleBackColor = true;
+            this.btnGenerateSchema.Click += new System.EventHandler(this.btnGenerateSchema_Click);
+            // 
             // toolTip1
             // 
             this.toolTip1.AutoPopDelay = 5000;
@@ -319,6 +350,7 @@
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -343,5 +375,8 @@
         private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
         private System.Windows.Forms.TableLayoutPanel tlpDyna1;
         private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnTestJson;
+        private System.Windows.Forms.Button btnGenerateSchema;
     }
 }
