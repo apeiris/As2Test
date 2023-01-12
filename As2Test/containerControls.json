@@ -1,56 +1,107 @@
 {
-  "$schema": "./containerControls.schema.json",
-  "parent": "tlpDyna1",
-  "type": "TableLayoutPanel",
+  "$schema": "containerControls.schema.json",
+  "container": "tlpDyna1",
   "controls": [
     {
-      "properties": {
+      "control": {
         "Type": "Label",
+        "Name": "Lblname",
         "Font": {
-          "Name": "consolas",
+          "Name": "Consolas",
           "Size": 10,
-          "Bold": "true"
+          "Bold": true
         },
-        "Cell": {"Row": 0,"Column": 0},
-        "TextAlign": "Left" 
-      }
+        "Cell": {
+          "Row": 0,
+          "Column": 0
+        },
+        "Dock": "Bottom",
+        "Text": "Sender",
+        "TextAlign": "MiddleLeft"
+
+      },
+      "comment": " row 0 col 0"
     },
     {
-      "properties": {
-        "Type": "TextBox",
+      "control": {
+        "Type": "Label",
+        "Name": "Label",
         "Font": {
-          "Name": "consolas",
+          "Name": "Segoe UI Variable",
           "Size": 10,
-          "Bold": "true"
+          "Bold": false
         },
-        "Cell": {"Row": 0,"Column": 1},
+        "Cell": {
+          "Row": 0,
+          "Column": 1
+        },  
+        "Dock": "Bottom",
+        "TextAlign": "Left",   
+        "Text": "${cmbPartnershipSender}"
+
+      },
+      "comment": " row 0 col 1"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Name": "Lblname",
+        "Font": {
+          "Name": "Consolas",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 1,
+          "Column": 0
+        },
+        "Dock": "Bottom",
+        "Text": "Receiver",
+        "TextAlign": "MiddleLeft"
+
+      },
+      "comment": "row 1 col 0"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Name": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 1,
+          "Column": 1
+        },
+        "Dock": "Bottom",
         "TextAlign": "Left",
-        "PlaceholderText": "this"
-      }
+        "Text": "${cmbPartnershipReceiver}"
+
+      },
+      "comment": "row 1 col 1"
     },
     {
-      "properties": {
+      "control": {
         "Type": "Label",
+        "Name": "Label",
         "Font": {
-          "Name": "consolas",
+          "Name": "Segoe UI Variable",
           "Size": 10,
-          "Bold": "true"
+          "Bold": false
         },
-        "Cell": {"Row": 1,"Column": 0},
-        "TextAlign": "Left"
-      }
-    },
-    {
-      "properties": {
-        "Type": "TextBox",
-        "Font": {
-          "Name": "consolas",
-          "Size": 10,
-          "Bold": "true"
+        "Cell": {
+          "Row": 2,
+          "Column": 0
         },
-        "Cell": {"Row": 1,"Column": 1},
-        "TextAlign": "Left"
-       }
+        "Dock": "Bottom",
+        "TextAlign": "Left",
+        "Text": "Poller  Enabled"
+
+      },
+      "comment": "row 2 col 0"
     }
+
   ]
 }

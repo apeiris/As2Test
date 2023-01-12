@@ -22,6 +22,13 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Xml.XPath;
+using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json;
+using System.Collections.Immutable;
+
 namespace As2Test
 {
     public enum implementaionFlavour
@@ -97,7 +104,7 @@ namespace As2Test
             container.ControlAdded += dynaControlAdded;
             string sControlType = ctlDef["t"].ToLower();
             ctlDef.Remove(sControlType);
-          
+
             int col = int.Parse(ctlDef["c"]);
             int row = int.Parse(ctlDef["r"]);
             var control = new Control(); //  dictControls[sControlType];
@@ -151,8 +158,8 @@ namespace As2Test
                         // Dictionary<string, string> fa = ctlDef["f"].Split(new char[] { '{', '}', ',' }, StringSplitOptions.RemoveEmptyEntries)
                         //       .ToDictionary(str => str.Split(new char[] { '=', })[0], str => str.Split(new char[] { '=' })[1]);
 
-                        Dictionary<string, string> fa = ctlDef["f"].Split(new char[] {'(',')'},StringSplitOptions.RemoveEmptyEntries).
-                           
+                        Dictionary<string, string> fa = ctlDef["f"].Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries).
+
                             ToDictionary(str => str.Split(new char[] { '=' })[0], str => str.Split(new char[] { '=' })[1]);
 
 
@@ -161,10 +168,10 @@ namespace As2Test
                         foreach (KeyValuePair<string, string> kvp in fa)
                             switch (kvp.Key)
                             {
-                                case "style" when kvp.Value == "b" || kvp.Value=="bold":
-                                    var fontStyle = (FontStyle)Enum.Parse((typeof(FontStyle)), "Bold"); 
-                                    control.Font = new Font(control.Font,fontStyle);
-                                    
+                                case "style" when kvp.Value == "b" || kvp.Value == "bold":
+                                    var fontStyle = (FontStyle)Enum.Parse((typeof(FontStyle)), "Bold");
+                                    control.Font = new Font(control.Font, fontStyle);
+
                                     break;
                                 case "style" when kvp.Value == "italic":
                                     control.Font = new Font(control.Font, FontStyle.Italic);
@@ -173,7 +180,7 @@ namespace As2Test
                                     control.ForeColor = Color.FromName(kvp.Value);
                                     break;
                                 case "size" when kvp.Value != string.Empty:
-                                    control.Font = new Font(control.Font.Name,  float.Parse(kvp.Value));
+                                    control.Font = new Font(control.Font.Name, float.Parse(kvp.Value));
                                     break;
                             }
                         break;
@@ -192,7 +199,7 @@ namespace As2Test
 
                 };
             }
-           
+
             control.Text = ctlDef["text"];
             add_toContainer(container, col, row, control);
             container.ControlAdded -= dynaControlAdded;
@@ -393,6 +400,60 @@ namespace As2Test
             }
 
             CreatePartnership(lblPartnership.Text);
+
+        }
+
+        private void btnTestJson_Click(object sender, EventArgs e)
+        {
+            JObject data = JObject.Parse(File.ReadAllText("containerControls.json"));
+            List<JToken> cc = data.SelectTokens("controls").Children().ToList();
+            Debug.WriteLine($"Count of Controls ={cc.Count()}");
+            var control = new Control();
+            Font font;
+            TableLayoutPanel container = (TableLayoutPanel)this.Controls.Find("tlpDyna1", true).First();
+            container.Controls.Clear();
+            int row, col = 0;
+            foreach (JToken c in cc)
+            {
+                Debug.WriteLine($"{c.ToString()}\n");
+                switch (c.SelectToken("..Type").ToString().ToLower())
+                {
+                    case "label":
+                        control = new Label();
+                        break;
+                    case "textbox":
+                        control = new TextBox();
+                        break;
+                    default:
+                        break;
+                }
+                String s = (string)c.SelectToken("..Font['Bold']").ToString().ToLower() == "true" ? "Bold" : "Regular";
+                FontStyle fs = (FontStyle)Enum.Parse(typeof(FontStyle), s);
+                font = new Font(c.SelectToken("..Font['Name']").ToString(), float.Parse((string)c.SelectToken("..Font['Size']")), fs);
+                control.Font = font;
+                control.Text = c.SelectToken("..Text").ToString();
+                if (control.Text.Contains("${"))
+                {
+                    string[] ss = control.Text.Split(new char[] { '$', '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
+                    var x = this.Controls.Find(ss[0], true);
+                    control.Text = x[0].Text;
+                    //   var y = typeof(Control).Assembly.GetType(x.GetType().FullName, true);
+                }
+
+                string dock =(string) c.SelectToken("..Dock");
+                if (!string.IsNullOrEmpty(dock))
+                    control.Dock = (DockStyle)Enum.Parse(typeof(DockStyle), dock);
+                row = int.Parse(c.SelectToken("..Cell.Row").ToString());
+                col = int.Parse(c.SelectToken("..Cell.Column").ToString());
+                container.Controls.Add(control, col, row);
+            }
+        }
+
+        private void btnGenerateSchema_Click(object sender, EventArgs e)
+        {
+            JObject data = JObject.Parse(File.ReadAllText("containerControls.json"));
+
+
 
         }
     }

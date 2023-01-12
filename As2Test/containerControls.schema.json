@@ -2,93 +2,63 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "$schema": {
-      "type": "string"
-    },
-    "parent": {
-      "type": "string"
-    },
+    "$schema": { "type": "string" },
+    "container": {"type": "string"},
     "controls": {
       "type": "array",
-      "items": {
-        "$ref": "#/definitions/Control"
-      }
+      "items": { "$ref": "#/definitions/Anonymous5" }
     }
   },
   "definitions": {
-    "Properties": {
+    "Control": {
       "type": "object",
       "properties": {
-        "Type": {
-          "enum": [
-            "Label",
-            "TextBox"
-          ]
-        },
-       
-        "Font": {
-          "$ref": "#/definitions/Font"
-        },
-        "Cell": {
-          "$ref": "#/definitions/Cell"
-        },
-        "TextAlign": {
-          "$ref": "#/definitions/TextAlign"
-        },
-        "PlaceholderText": { "type": "string" }
+        "Type": { "$ref": "#/definitions/ControlType" },
+        "Name": { "type": "string" },
+        "Font": { "$ref": "#/definitions/Font" },
+        "Cell": { "$ref": "#/definitions/Cell" },
+        "Dock": {"$ref": "#/definitions/Dock"},
+        "PlaceholderText": { "type": "string" },
+        "TextAlign": { "$ref": "#/definitions/TextAlign" },
+        "Text": {"type": "string"}
       }
-
     },
     "Font": {
       "type": "object",
       "properties": {
-        "Name": {
-          "enum": [
-            "consolas",
-            "arial"
-          ]
-        },
-        "Size": {
-          "type": "integer"
-        },
-        "Bold": {
+        "Name": { "enum": [ "Arial", "Consolas", "Segoe UI Variable" ] },
+        "Size": { "type": "integer" },
+        "Bold": { "type": "boolean" }
+      }
+    },
+    "TextAlign": { "enum": [ "Left", "Right", "TopLeft", "TopCenter", "TopRight", "MiddleLeft", "MiddleCenter", "MiddleRight", "BottomLeft", "BottomCenter", "BottomRight" ] },
+    "Cell": {
+      "type": "object",
+      "properties": {
+        "Row": { "type": "integer" },
+        "Column": { "type": "integer" }
+      }
+    },
+    "ControlType": { "enum": [ "Label", "TextBox" ] },
+    "Dock": {"enum": ["Left","Right","Top","Bottom","Fill","None"]},
+    "Anonymous4": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "Font": { "$ref": "#/definitions/Font" },
+        "Cell": { "$ref": "#/definitions/Cell" },
+        "TextAlign": { "type": "string" },
+        "PlaceholderText": {
           "type": "string"
         }
       }
     },
-    "TextAlign": {
-      "enum": [
-        "Left",
-        "Right",
-        "TopLeft",
-        "TopCenter",
-        "TopRight",
-        "MiddleLeft",
-        "MiddleCenter",
-        "MiddleRight",
-        "BottomLeft",
-        "BottomCenter",
-        "BottomRight"
-      ]
-    },
-    "Cell": {
+    "Anonymous5": {
       "type": "object",
       "properties": {
-        "Row": {
-          "type": "integer"
-        },
-        "Column": {
-          "type": "integer"
-        }
-      }
-    },
-    "Control": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Properties"
-        }
+        "control": { "$ref": "#/definitions/Control" }
       }
     }
+
   }
 }
