@@ -14,7 +14,7 @@ public static class xtElement
     public static XAttribute XPathSelectAttribute(this XElement element, string xPath)
     {
         return ((IEnumerable<object>)element.XPathEvaluate(xPath)).OfType<XAttribute>().First();
-        //return element.Attributes(xPath).First();
+        
     }
 }
 public static class xtattribs

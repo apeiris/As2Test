@@ -28,6 +28,7 @@ using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json;
 using System.Collections.Immutable;
+using System.Net.NetworkInformation;
 
 namespace As2Test
 {
@@ -368,12 +369,12 @@ namespace As2Test
             //XElement.Parse()
 
             string s = this.partnershipXDoc.ToString();
-            webView21.AllowExternalDrop = true;
+       //     webView21.AllowExternalDrop = true;
 
             Uri x = new Uri("file:///C:/Users/mapei/source/repos/As2Test/As2Test/bin/Debug/netcoreapp3.1/emptyPartnership.xml");
 
 
-            webView21.Source = x;
+         //   webView21.Source = x;
 
             switch (cmbPartnershipFlavor.SelectedIndex)
             {
@@ -409,10 +410,43 @@ namespace As2Test
             List<JToken> cc = data.SelectTokens("controls").Children().ToList();
             Debug.WriteLine($"Count of Controls ={cc.Count()}");
             var control = new Control();
+            var parentControl = new Control();
             Font font;
             TableLayoutPanel container = (TableLayoutPanel)this.Controls.Find("tlpDyna1", true).First();
+           // DataGridView container = new DataGridView();
             container.Controls.Clear();
+
+            var x = "";
+            if (!string.IsNullOrEmpty((string)data.SelectToken("$.container.RowStyle.SizeType")))
+            {
+                SizeType st = (SizeType)Enum.Parse(typeof(SizeType), (string)data.SelectToken("$.container.RowStyle.SizeType"));
+                int rh = int.Parse((string)data.SelectToken("$..RowStyle.Height"));
+                TableLayoutRowStyleCollection rstyles = container.RowStyles;
+                foreach (RowStyle style in rstyles)
+                {
+                    style.Height = rh;
+                    style.SizeType = st;
+                }
+            }
+            container.ColumnStyles.Clear();
+            container.SetColumnSpan(container.Parent,3  );
+            List<JToken> columns = data.SelectTokens("$.container.ColumnStyle").Children().ToList();
+            int cs = 1;// int.Parse(data.SelectToken("$.container.ColumnSpan").ToString());
+            Debug.WriteLine($"{cs} {columns.Count} parent name={container.Parent.Name}parent");
+            container.SetColumnSpan(container, 3);
+            TableLayoutColumnStyleCollection styles = container.ColumnStyles;
+            foreach (JToken colo in columns)
+            {
+                ColumnStyle style = new ColumnStyle();
+
+                
+                styles.Add(new ColumnStyle((SizeType)Enum.Parse(typeof(SizeType), (string)colo.SelectToken("SizeType")), float.Parse((string)colo.SelectToken("Width"))));
+                container.ColumnStyles.Add(style);
+            }
+
             int row, col = 0;
+            XElement xe = null;
+            XDocument pdocTemplate = getPartnershipTemplate();
             foreach (JToken c in cc)
             {
                 Debug.WriteLine($"{c.ToString()}\n");
@@ -422,29 +456,98 @@ namespace As2Test
                         control = new Label();
                         break;
                     case "textbox":
-                        control = new TextBox();
+                        TextBox tcontrol = new TextBox();
+
+                        if (!string.IsNullOrEmpty((string)c.SelectToken("..Multiline")))
+                            tcontrol.Multiline = bool.Parse((string)c.SelectToken("..Multiline"));
+
+                        if (!string.IsNullOrEmpty((string)c.SelectToken("..ScrollBars")))
+                        {
+                            tcontrol.ScrollBars = (ScrollBars)Enum.Parse(typeof(ScrollBars), (string)c.SelectToken("..ScrollBars"));
+                        }
+                        //  toolTip1.SetToolTip(tcontrol, null);
+
+                                               
                         break;
+                    case "groupbox":
+                        parentControl = new GroupBox();
+                        x = c.SelectToken("..XPath").ToString();
+                        xe = pdocTemplate.XPathSelectElement(x);
+                        parentControl.Name = xe.Name.LocalName;
+                        break;
+                    case "radiobutton":
+                        break;
+                    case "checkbox":
+                        CheckBox ccontrol = new CheckBox();
+                       // ccontrol.Text = c.SelectToken("..Text").ToString();
+                        x = c.SelectToken("..XPath").ToString();
+                       string sxe= utils.elementAxisOfXpath(x);
+                        string attribute = x.Replace(sxe, "").TrimStart('/');
+                    
+                       // ccontrol.Checked = xe.XPathSelectAttribute("@enabled").Value == "true" ? true : false;
+                        ccontrol.CheckedChanged += checkBox_CheckedChanged;
+                        ccontrol.Tag = c.SelectToken("..StateText");
+                        control = ccontrol;
+                        checkBox_CheckedChanged(control, null);
+                        break;
+
                     default:
                         break;
                 }
-                String s = (string)c.SelectToken("..Font['Bold']").ToString().ToLower() == "true" ? "Bold" : "Regular";
-                FontStyle fs = (FontStyle)Enum.Parse(typeof(FontStyle), s);
-                font = new Font(c.SelectToken("..Font['Name']").ToString(), float.Parse((string)c.SelectToken("..Font['Size']")), fs);
-                control.Font = font;
-                control.Text = c.SelectToken("..Text").ToString();
+
+                if (c.ToString().Contains("Font"))
+                {
+                    String? s = (string)c.SelectToken("..Font['Bold']").ToString().ToLower() == "true" ? "Bold" : "Regular";
+                    FontStyle fs = (FontStyle)Enum.Parse(typeof(FontStyle), s);
+                    font = new Font(c.SelectToken("..Font['Name']").ToString(), float.Parse((string)c.SelectToken("..Font['Size']")), fs);
+                    control.Font = font;
+                }
+                if (!string.IsNullOrEmpty((string)c.SelectToken("..Text"))) control.Text = c.SelectToken("..Text").ToString();
                 if (control.Text.Contains("${"))
                 {
                     string[] ss = control.Text.Split(new char[] { '$', '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
-                    var x = this.Controls.Find(ss[0], true);
-                    control.Text = x[0].Text;
-                    //   var y = typeof(Control).Assembly.GetType(x.GetType().FullName, true);
+                    var cx = this.Controls.Find(ss[0], true);
+                    control.Text = cx[0].Text;
+
+                }
+                if (control.Text.Contains("xpath{"))
+                {
+                    string[] ss = control.Text.Split(new string?[] { "xpath{", "}" }, StringSplitOptions.RemoveEmptyEntries);
+                    control.Text = ((IEnumerable<object>)pdocTemplate.XPathEvaluate(ss[0]))
+                               .OfType<XAttribute>()
+                               .Single()
+                               .Value;
+
                 }
 
-                string dock =(string) c.SelectToken("..Dock");
+
+                string dock = (string)c.SelectToken("..Dock");
                 if (!string.IsNullOrEmpty(dock))
                     control.Dock = (DockStyle)Enum.Parse(typeof(DockStyle), dock);
+
+                if (!string.IsNullOrEmpty((string)c.SelectToken("..Width"))) control.Width = (int)c.SelectToken("..Width");
+
                 row = int.Parse(c.SelectToken("..Cell.Row").ToString());
                 col = int.Parse(c.SelectToken("..Cell.Column").ToString());
+                if (c.ToString().Contains("ToolTip"))
+                {
+                    if (!string.IsNullOrEmpty((string)c.SelectToken("..ToolTip")))
+                    {
+                        string xx = (string)c.SelectToken("..ToolTip").ToString();
+                        if (xx.Contains("${"))
+                        {
+                            string ss = xx.Split(new char[] { '$', '{', '}' }, StringSplitOptions.RemoveEmptyEntries)[0].ToLower();
+                            switch (ss)
+                            {
+                                case "text":
+                                    toolTip1.SetToolTip(control, control.Text);
+                                    break;
+                            }
+                            // toolTip1.SetToolTip(control, (stri
+                        }
+                    }
+                }
+                
                 container.Controls.Add(control, col, row);
             }
         }
@@ -456,6 +559,18 @@ namespace As2Test
 
 
         }
+
+
+        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!uiShown) return;
+            CheckBox c = (CheckBox)sender;
+            string[] st = c.Tag.ToString().Split(new char[] { ':', ',' });
+            c.Text = c.Checked ? st[0] : st[1];
+            c.ForeColor = c.Checked ? Color.Green : Color.Brown;
+            c.Refresh();
+        }
+
     }
     [XmlRootAttribute("partnership", Namespace = null, IsNullable = false)]
     public class partnership

@@ -2,63 +2,1567 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "$schema": { "type": "string" },
-    "container": {"type": "string"},
+    "$schema": {
+      "type": "string"
+    },
+    "container": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "RowStyle": {
+          "type": "object",
+          "properties": {
+            "SizeType": {
+              "type": "string"
+            },
+            "Height": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "SizeType",
+            "Height"
+          ]
+        },
+        "ColumnStyle": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "SizeType": {
+                  "type": "string"
+                },
+                "Width": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "SizeType",
+                "Width"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "SizeType": {
+                  "type": "string"
+                },
+                "Width": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "SizeType",
+                "Width"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "Name",
+        "RowStyle",
+        "ColumnStyle"
+      ]
+    },
     "controls": {
       "type": "array",
-      "items": { "$ref": "#/definitions/Anonymous5" }
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Name",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "XPath": {
+                  "type": "string"
+                },
+                "ToolTip": {"type": "string"}
+              },
+              "required": [
+                "Type",
+                "Name",
+                "Font",
+                "Cell",
+                "Dock",
+                "TextAlign",
+                "Text",
+                "XPath",
+                "ToolTip"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Name",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "XPath": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Name",
+                "Font",
+                "Cell",
+                "Dock",
+                "TextAlign",
+                "Text",
+                "XPath"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Name",
+                "Font",
+                "Cell",
+                "Dock",
+                "TextAlign",
+                "Text"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "XPath": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Name",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign",
+                "XPath"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "ScrollBars": {
+                  "type": "string"
+                },
+                "Multiline": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "Type": {
+                  "type": "string"
+                },
+                "Width": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "Cell",
+                "Dock",
+                "Font",
+                "ScrollBars",
+                "Multiline",
+                "Text",
+                "TextAlign",
+                "Type",
+                "Width"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "ScrollBars": {
+                  "type": "string"
+                },
+                "Multiline": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "Type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Cell",
+                "Dock",
+                "Font",
+                "ScrollBars",
+                "Multiline",
+                "Text",
+                "TextAlign",
+                "Type"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "ScrollBars": {
+                  "type": "string"
+                },
+                "Multiline": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "Type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Cell",
+                "Dock",
+                "Font",
+                "ScrollBars",
+                "Multiline",
+                "Text",
+                "TextAlign",
+                "Type"
+              ]
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "control",
+            "comment"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Type",
+                "Font",
+                "Cell",
+                "Dock",
+                "Text",
+                "TextAlign"
+              ]
+            }
+          },
+          "required": [
+            "control"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "type": "object",
+              "properties": {
+                "Cell": {
+                  "type": "object",
+                  "properties": {
+                    "Row": {
+                      "type": "integer"
+                    },
+                    "Column": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "Row",
+                    "Column"
+                  ]
+                },
+                "Dock": {
+                  "type": "string"
+                },
+                "Font": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Size": {
+                      "type": "integer"
+                    },
+                    "Bold": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "Name",
+                    "Size",
+                    "Bold"
+                  ]
+                },
+                "ScrollBars": {
+                  "type": "string"
+                },
+                "Multiline": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "TextAlign": {
+                  "type": "string"
+                },
+                "Type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Cell",
+                "Dock",
+                "Font",
+                "ScrollBars",
+                "Multiline",
+                "Text",
+                "TextAlign",
+                "Type"
+              ]
+            }
+          },
+          "required": [
+            "control"
+          ]
+        }
+      ]
     }
   },
-  "definitions": {
-    "Control": {
-      "type": "object",
-      "properties": {
-        "Type": { "$ref": "#/definitions/ControlType" },
-        "Name": { "type": "string" },
-        "Font": { "$ref": "#/definitions/Font" },
-        "Cell": { "$ref": "#/definitions/Cell" },
-        "Dock": {"$ref": "#/definitions/Dock"},
-        "PlaceholderText": { "type": "string" },
-        "TextAlign": { "$ref": "#/definitions/TextAlign" },
-        "Text": {"type": "string"}
-      }
-    },
-    "Font": {
-      "type": "object",
-      "properties": {
-        "Name": { "enum": [ "Arial", "Consolas", "Segoe UI Variable" ] },
-        "Size": { "type": "integer" },
-        "Bold": { "type": "boolean" }
-      }
-    },
-    "TextAlign": { "enum": [ "Left", "Right", "TopLeft", "TopCenter", "TopRight", "MiddleLeft", "MiddleCenter", "MiddleRight", "BottomLeft", "BottomCenter", "BottomRight" ] },
-    "Cell": {
-      "type": "object",
-      "properties": {
-        "Row": { "type": "integer" },
-        "Column": { "type": "integer" }
-      }
-    },
-    "ControlType": { "enum": [ "Label", "TextBox" ] },
-    "Dock": {"enum": ["Left","Right","Top","Bottom","Fill","None"]},
-    "Anonymous4": {
-      "type": "object",
-      "properties": {
-        "type": { "type": "string" },
-        "Font": { "$ref": "#/definitions/Font" },
-        "Cell": { "$ref": "#/definitions/Cell" },
-        "TextAlign": { "type": "string" },
-        "PlaceholderText": {
-          "type": "string"
-        }
-      }
-    },
-    "Anonymous5": {
-      "type": "object",
-      "properties": {
-        "control": { "$ref": "#/definitions/Control" }
-      }
-    }
-
-  }
+  "required": [
+    "$schema",
+    "container",
+    "controls"
+  ]
 }
