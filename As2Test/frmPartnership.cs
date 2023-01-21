@@ -399,7 +399,7 @@ namespace As2Test
                 default:
                     break;
             }
-
+               
             CreatePartnership(lblPartnership.Text);
 
         }
