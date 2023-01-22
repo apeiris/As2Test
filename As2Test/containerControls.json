@@ -1,13 +1,32 @@
 {
   "$schema": "containerControls.schema.json",
-  "container": "tlpDyna1",
+  "container": {
+    "Name": "tlpDyna1",
+
+    "RowStyle": {
+      "SizeType": "Absolute",
+      "Height": 28
+    },
+   
+    "ColumnStyle": [
+      {
+        "SizeType": "Absolute",
+        "Width": 300
+
+      },
+      {
+        "SizeType": "Absolute",
+        "Width": 1500
+      }
+    ]
+  },
   "controls": [
     {
       "control": {
         "Type": "Label",
         "Name": "Lblname",
         "Font": {
-          "Name": "Consolas",
+          "Name": "Segoe UI Variable",
           "Size": 10,
           "Bold": true
         },
@@ -17,8 +36,8 @@
         },
         "Dock": "Bottom",
         "Text": "Sender",
-        "TextAlign": "MiddleLeft"
-
+        "TextAlign": "MiddleLeft",
+        "ToolTip": ""
       },
       "comment": " row 0 col 0"
     },
@@ -34,11 +53,12 @@
         "Cell": {
           "Row": 0,
           "Column": 1
-        },  
+        },
         "Dock": "Bottom",
-        "TextAlign": "Left",   
-        "Text": "${cmbPartnershipSender}"
-
+        "TextAlign": "Left",
+        "Text": "${cmbPartnershipSender}",
+        "XPath": ".//sender",
+        "ToolTip": ""
       },
       "comment": " row 0 col 1"
     },
@@ -47,7 +67,7 @@
         "Type": "Label",
         "Name": "Lblname",
         "Font": {
-          "Name": "Consolas",
+          "Name": "Segoe UI Variable",
           "Size": 10,
           "Bold": true
         },
@@ -77,7 +97,8 @@
         },
         "Dock": "Bottom",
         "TextAlign": "Left",
-        "Text": "${cmbPartnershipReceiver}"
+        "Text": "${cmbPartnershipReceiver}",
+        "XPath": ".//receiver"
 
       },
       "comment": "row 1 col 1"
@@ -89,7 +110,7 @@
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
-          "Bold": false
+          "Bold": true
         },
         "Cell": {
           "Row": 2,
@@ -98,10 +119,183 @@
         "Dock": "Bottom",
         "TextAlign": "Left",
         "Text": "Poller  Enabled"
-
       },
       "comment": "row 2 col 0"
+    },
+    {
+      "control": {
+        "Type": "CheckBox",
+        "Name": "PollerEnabled",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 2,
+          "Column": 1
+        },
+        "Dock": "Fill",
+        "TextAlign": "Left",
+        "StateText": "Enabled:Disabled",
+        "XPath": ".//pollerConfig/@enabled"
+      },
+      "comment": "row 2 col 1"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 3,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "Protocol",
+        "TextAlign": "Left"
+
+      },
+      "comment": "row 3 col 0"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 3,
+          "Column": 1
+        },
+        "Dock": "Fill",
+        "Text": "xpath{.//attribute[@name='protocol']/@value}",
+        "TextAlign": "Left"
+      },
+      "comment": "row 3 col 1"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 4,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "Content transfer encoding",
+        "TextAlign": "Left"
+
+      },
+      "comment": "row 4 col 0"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 4,
+          "Column": 1
+        },
+        "Dock": "Fill",
+        "Text": "xpath{.//attribute[@name='content_transfer_encoding']/@value}",
+        "TextAlign": "Left"
+
+      },
+      "comment": "row 4 col 1"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 5,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "Compression Type",
+        "TextAlign": "Left"
+
+      },
+      "comment": "row 5 col 0"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 5,
+          "Column": 1
+        },
+        "Dock": "Fill",
+        "Text": "xpath{.//attribute[@name='compression_type']/@value}",
+        "TextAlign": "Left"
+
+      },
+      "comment": "row 5 col 1"
+    },
+    // row 6
+
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 6,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "Subject",
+        "TextAlign": "Left"
+
+      },
+      "comment": "row 5 col 0"
+    },
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row":6,
+          "Column": 1
+        },
+        "Dock": "Fill",
+        "Text": "xpath{.//attribute[@name='subject']/@value}",
+        "TextAlign": "Left"
+
+      },
+      "comment": "row 5 col 1"
     }
+
 
   ]
 }
