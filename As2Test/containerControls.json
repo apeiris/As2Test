@@ -7,20 +7,21 @@
       "SizeType": "Absolute",
       "Height": 28
     },
-   
+    "ScrollBars": "None",
     "ColumnStyle": [
       {
         "SizeType": "Absolute",
-        "Width": 300
+        "Width": 250
 
       },
       {
         "SizeType": "Absolute",
-        "Width": 1500
+        "Width": 300
       }
     ]
   },
   "controls": [
+    // 0 Sender
     {
       "control": {
         "Type": "Label",
@@ -38,13 +39,13 @@
         "Text": "Sender",
         "TextAlign": "MiddleLeft",
         "ToolTip": ""
-      },
-      "comment": " row 0 col 0"
+      }
+
     },
     {
       "control": {
         "Type": "Label",
-        "Name": "Label",
+        "Name": "lblSender",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
@@ -57,15 +58,15 @@
         "Dock": "Bottom",
         "TextAlign": "Left",
         "Text": "${cmbPartnershipSender}",
-        "XPath": ".//sender",
-        "ToolTip": ""
-      },
-      "comment": " row 0 col 1"
+        "XPath": ".//sender/@name",
+        "ToolTip": "The <partnership> element encapsulates a number of child elements that are necessary to properly\nconfigure a partnership:\n\t• <sender name=”xxx”> - identifies the sending partner definition such that xxx must match\n\t\tthe “name” attribute of a <partner> element\n\t• <receiver name=”yyy”> - identifies the receiving partner definition such that yyy must match\n\t\tthe “name” attribute of a <partner> element\n\t• <as2_url> - a fully qualified URI that provides the connection string to the remote partner\n\t\tfor sending AS2 messages. If sending to another OpenAS2 server then the port number must\n\t\tmatch the value configured in the config.xml file of the remote OpenAS2 server.\n\t\tNOTE: This attribute supports Dynamic Variables and can be used to target modify the URL\n\t\tdynamically. See the section Dynamic AS2 Url Configuration for more information.\n\t• <as2_mdn_to> - neccesary if an MDN response is required and can be any random string\n\t\tbut is most commonly configured with an email address"
+      }
     },
+    // 1 Receiver
     {
       "control": {
         "Type": "Label",
-        "Name": "Lblname",
+        "Name": "Label",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
@@ -75,17 +76,17 @@
           "Row": 1,
           "Column": 0
         },
+        "LinkedControls": ["cmbPartnershipReceiver"],
         "Dock": "Bottom",
         "Text": "Receiver",
         "TextAlign": "MiddleLeft"
 
-      },
-      "comment": "row 1 col 0"
+      }
     },
     {
       "control": {
         "Type": "Label",
-        "Name": "Label",
+        "Name": "lblReceiver",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
@@ -98,11 +99,12 @@
         "Dock": "Bottom",
         "TextAlign": "Left",
         "Text": "${cmbPartnershipReceiver}",
-        "XPath": ".//receiver"
+        "ToolTip": "The <partnership> element encapsulates a number of child elements that are necessary to properly\nconfigure a partnership:\n\t• <sender name=”xxx”> - identifies the sending partner definition such that xxx must match\n\t\tthe “name” attribute of a <partner> element\n\t• <receiver name=”yyy”> - identifies the receiving partner definition such that yyy must match\n\t\tthe “name” attribute of a <partner> element\n\t• <as2_url> - a fully qualified URI that provides the connection string to the remote partner\n\t\tfor sending AS2 messages. If sending to another OpenAS2 server then the port number must\n\t\tmatch the value configured in the config.xml file of the remote OpenAS2 server.\n\t\tNOTE: This attribute supports Dynamic Variables and can be used to target modify the URL\n\t\tdynamically. See the section Dynamic AS2 Url Configuration for more information.\n\t• <as2_mdn_to> - neccesary if an MDN response is required and can be any random string\n\t\tbut is most commonly configured with an email address",
 
-      },
-      "comment": "row 1 col 1"
+        "XPath": ".//receiver/@name"
+      }
     },
+    // 2 Reject unsigned
     {
       "control": {
         "Type": "Label",
@@ -118,14 +120,14 @@
         },
         "Dock": "Bottom",
         "TextAlign": "Left",
-        "Text": "Poller  Enabled"
+        "Text": "Reject unsigned messages"
       },
       "comment": "row 2 col 0"
     },
     {
       "control": {
         "Type": "CheckBox",
-        "Name": "PollerEnabled",
+        "Name": "chkRejectUnsigned",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
@@ -137,14 +139,18 @@
         },
         "Dock": "Fill",
         "TextAlign": "Left",
-        "StateText": "Enabled:Disabled",
-        "XPath": ".//pollerConfig/@enabled"
+        "ToolTip": "The AS2 protocol allows messages to be sent unsigned but this can be a security risk. OpenAS2\nsupports being able to reject any messages that are sent unsigned by setting an attribute on the\npartnership or for global applicability, as a parameter.\nThe default setting is to not enforce signing of messages. This overrides global Config.XML settings.",
+        "StateText": "true:false",
+        "XPath": ".//attribute[@name='reject_unsigned_messages']/@value"
       },
+      "attribute": null,
       "comment": "row 2 col 1"
     },
+    // 3 Poller enabled
     {
       "control": {
         "Type": "Label",
+        "Name": "Label",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
@@ -154,16 +160,15 @@
           "Row": 3,
           "Column": 0
         },
-        "Dock": "Fill",
-        "Text": "Protocol",
-        "TextAlign": "Left"
-
-      },
-      "comment": "row 3 col 0"
+        "Dock": "Bottom",
+        "TextAlign": "Left",
+        "Text": "Poller  Enabled"
+      }
     },
     {
       "control": {
-        "Type": "Label",
+        "Type": "CheckBox",
+        "Name": "chkPollerEnabled",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
@@ -174,11 +179,14 @@
           "Column": 1
         },
         "Dock": "Fill",
-        "Text": "xpath{.//attribute[@name='protocol']/@value}",
-        "TextAlign": "Left"
-      },
-      "comment": "row 3 col 1"
+        "TextAlign": "Left",
+        "StateText": "true:false",
+        "XPath": ".//pollerConfig/@enabled"
+      }
+
     },
+   
+    // 4 Content transfer encoding
     {
       "control": {
         "Type": "Label",
@@ -191,16 +199,16 @@
           "Row": 4,
           "Column": 0
         },
-        "Dock": "Fill",
+        "Dock": "Left",
         "Text": "Content transfer encoding",
-        "TextAlign": "Left"
-
-      },
-      "comment": "row 4 col 0"
+        "TextAlign": "Left",
+        "Width": 320
+      }
     },
     {
       "control": {
-        "Type": "Label",
+        "Name": "cmbContentTransferEncoding",
+        "Type": "ComboBox",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
@@ -210,13 +218,32 @@
           "Row": 4,
           "Column": 1
         },
-        "Dock": "Fill",
+        "Items": [
+          "binary",
+          "MD5",
+          "SHA1",
+          "SHA224",
+          "SHA256",
+          "SHA384",
+          "SHA512",
+          "CAST5",
+          "3DES",
+          "IDEA",
+          "RC2_CBC",
+          "AES128",
+          "AES192",
+          "AES256",
+          "AES256_WRAP"
+        ],
+        "Width": 120,
+        "Dock": "Left",
         "Text": "xpath{.//attribute[@name='content_transfer_encoding']/@value}",
-        "TextAlign": "Left"
-
-      },
-      "comment": "row 4 col 1"
+        "TextAlign": "Left",
+        "ToolTip": "As of version 1.3.7, the default content transfer encoding uses “binary” if not explicitly overwritten\nin the configuration. The default can be changed using the “content_transfer_encoding” attribute\nin the partnership.xml file. If you experience issues with failing to verify a partners AS2 inbound\nmessage because the message contains CR/LF data in it then you should switch to using “binary”\nfor the transfer encoding. The sample partnership file sets the transfer encoding to “binary” for both\npartners.\nIMPORTANT NOTE: The Content-Transfer-Encoding header is a restricted HTTP header and will\nnot be sent in the HTTP headers but some systems will fail if not sent – see the trouble shooting\nsection for restricted HTTP headers to manage this",
+        "XPath": ".//attribute[@name='content_transfer_encoding']/@value"
+      }
     },
+    // 5 Compression Type
     {
       "control": {
         "Type": "Label",
@@ -233,12 +260,12 @@
         "Text": "Compression Type",
         "TextAlign": "Left"
 
-      },
-      "comment": "row 5 col 0"
+      }
     },
     {
       "control": {
-        "Type": "Label",
+        "Name": "cmbCompressionType",
+        "Type": "ComboBox",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
@@ -248,15 +275,15 @@
           "Row": 5,
           "Column": 1
         },
-        "Dock": "Fill",
+        "Items": [ "ZLIB", "None" ],
+        "Width": 120,
+        "Dock": "Left",
         "Text": "xpath{.//attribute[@name='compression_type']/@value}",
-        "TextAlign": "Left"
-
-      },
-      "comment": "row 5 col 1"
+        "TextAlign": "Left",
+        "XPath": ".//attribute[@name='compression_type']/@value"
+      }
     },
-    // row 6
-
+    // 6 subject
     {
       "control": {
         "Type": "Label",
@@ -266,36 +293,412 @@
           "Bold": true
         },
         "Cell": {
-          "Row": 6,
+          "Row":6,
           "Column": 0
         },
         "Dock": "Fill",
         "Text": "Subject",
         "TextAlign": "Left"
-
-      },
-      "comment": "row 5 col 0"
+      }
     },
     {
       "control": {
-        "Type": "Label",
+        "Name": "txtSubject",
+        "Type": "TextBox",
         "Font": {
           "Name": "Segoe UI Variable",
           "Size": 10,
           "Bold": false
         },
         "Cell": {
-          "Row":6,
+          "Row": 6,
           "Column": 1
         },
+
         "Dock": "Fill",
         "Text": "xpath{.//attribute[@name='subject']/@value}",
+        "TextAlign": "Left",
+        "Width": 500,
+        "XPath": ".//attribute[@name='subject']/@value"
+      }
+
+    },
+    // 7 AS2 URL 
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 7,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "AS2 URL",
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "control": {
+        "Name": "txtAs2Url",
+        "Type": "TextBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 7,
+          "Column": 1
+        },
+
+        "Dock": "Fill",
+        "Text": "xpath{.//attribute[@name='as2_url']/@value}",
+        "TextAlign": "Left",
+        "Width": 500,
+        "XPath": ".//attribute[@name='as2_url']/@value"
+
+      }
+
+    },
+    // 8 Send MDN to
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 8,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "Send MDN to",
         "TextAlign": "Left"
 
-      },
-      "comment": "row 5 col 1"
+      }
+    },
+    {
+      "control": {
+        "Name": "txtSendMdnTo",
+        "Type": "TextBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 8,
+          "Column": 1
+        },
+
+        "Dock": "Fill",
+        "Text": "xpath{.//attribute[@name='as2_mdn_to']/@value}",
+        "TextAlign": "Left",
+        "ToolTip": "The <partnership> element encapsulates a number of child elements that are necessary to properly\nconfigure a partnership:\n\t• <sender name=”xxx”> - identifies the sending partner definition such that xxx must match\n\t\tthe “name” attribute of a <partner> element\n\t• <receiver name=”yyy”> - identifies the receiving partner definition such that yyy must match\n\t\tthe “name” attribute of a <partner> element\n\t• <as2_url> - a fully qualified URI that provides the connection string to the remote partner\n\t\tfor sending AS2 messages. If sending to another OpenAS2 server then the port number must\n\t\tmatch the value configured in the config.xml file of the remote OpenAS2 server.\n\t\tNOTE: This attribute supports Dynamic Variables and can be used to target modify the URL\n\t\tdynamically. See the section Dynamic AS2 Url Configuration for more information.\n\t• <as2_mdn_to> - neccesary if an MDN response is required and can be any random string\n\t\tbut is most commonly configured with an email address",
+        "Width": 500,
+        "XPath": ".//attribute[@name='as2_mdn_to']/@value"
+      }
+    },
+    // 9 MDN Options
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 9,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "MDN Options",
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "control": {
+        "Name": "txtMdnOptions",
+        "Type": "TextBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 9,
+          "Column": 1
+        },
+
+        "Dock": "Fill",
+        "Text": "xpath{.//attribute[@name='as2_mdn_options']/@value}",
+        "TextAlign": "Left",
+        "ToolTip": "The MDN must be signed using the same algorithm that the sent message was signed with. \nThe recipient partner is told the signature algorithm via a field in the as2_mdn_options” attribute and\nthe value uses the $attribute.sign$ dynamic variable to ensure it matches the 'sign' attribute as \nshown in the example below:\n<attribute name='as2_mdn_options'\nvalue='signed-receipt-protocol=optional, pkcs7-signature;\nsigned-receipt-micalg=optional, $attribute.sign$'/>\nIf you receive errors something like 'mismatched Message Digest or similar messages then ensure\nyou have this attribute set correctly.\nIf you need to send an unsigned MDN then set the attribute on the partnership as below:\n<attribute name='as2_mdn_options' value='none'/>",
+        "Width": 700,
+        "XPath": ".//attribute[@name='as2_mdn_options']/@value"
+      }
+    },
+    // 10 Encryption
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 10,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "Encryption",
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "control": {
+        "Name": "txtEncrypt",
+        "Type": "TextBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 10,
+          "Column": 1
+        },
+
+        "Dock": "Fill",
+        "Text": "xpath{.//attribute[@name='encrypt']/@value}",
+        "TextAlign": "Left",
+        "Width": 700,
+        "XPath": ".//attribute[@name='encrypt']/@value"
+      }
+
+    },
+    // 11 Sign
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 11,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "Sign",
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "control": {
+        "Name": "cmgSign",
+        "Type": "ComboBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 11,
+          "Column": 1
+        },
+        "Items": [
+          "MD2",
+          "MD5",
+          "SHA1",
+          "SHA224",
+          "SHA256",
+          "SHA384",
+          "SHA512",
+          "none"
+        ],
+        "Width": 120,
+        "Dock": "Left",
+        "Text": "xpath{.//attribute[@name='sign']/@value}",
+        "TextAlign": "Left",
+        "ToolTip": "Signing is controlled by the “sign” attribute in the “partnership” element. Select 'none' if the partnership to send a message without signing.",
+        "XPath": ".//attribute[@name='sign']/@value"
+      }
+    },
+    // 12 Resend retries
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 12,
+          "Column": 0
+        },
+        "Dock": "Fill",
+        "Text": "Resend re-tries",
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "control": {
+        "Name": "txtRetries",
+        "Type": "TextBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 11,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 12,
+          "Column": 1
+        },
+
+        "Dock": "Left",
+        "Text": "xpath{.//attribute[@name='resend_max_retries']/@value}",
+        "TextAlign": "Left",
+        "Width": 20,
+        "XPath": ".//attribute[@name='resend_max_retries']/@value"
+      }
+
+    },
+    // 13 prevent cononicalization for MIC
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 13,
+          "Column": 0
+        },
+        "Width": 600,
+
+        "Dock": "Fill",
+        "Text": "Prevent Canonicalization for MIC",
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "control": {
+        "Name": "chkPreventCanoForMIC",
+        "Type": "CheckBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 13,
+          "Column": 1
+        },
+
+        "Dock": "Fill",
+        "StateText": "true,false",
+        "XPath": ".//attribute[@name='prevent_canonicalization_for_mic']/@value",
+        "TextAlign": "Left",
+        "Width": 20
+      }
+
+    },
+    // 14 Rename digest to old name
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 14,
+          "Column": 0
+        },
+        "Width": 600,
+
+        "Dock": "Fill",
+        "Text": "Rename Digest to old name",
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "control": {
+        "Name": "chkRenameDigest",
+        "Type": "CheckBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 14,
+          "Column": 1
+        },
+
+        "Dock": "Fill",
+        "StateText": "true,false",
+        "XPath": ".//attribute[@name='rename_digest_to_old_name']/@value",
+        "TextAlign": "Left",
+        "Width": 20
+      }
+
+    },
+    // 15 Remove Cms Algorithm protection
+    {
+      "control": {
+        "Type": "Label",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": true
+        },
+        "Cell": {
+          "Row": 15,
+          "Column": 0
+        },
+        "Width": 600,
+
+        "Dock": "Fill",
+        "Text": "Remove cms algorithm protection",
+        "TextAlign": "Left"
+      }
+    },
+    {
+      "control": {
+        "Name": "chkRemoveCMS",
+        "Type": "CheckBox",
+        "Font": {
+          "Name": "Segoe UI Variable",
+          "Size": 10,
+          "Bold": false
+        },
+        "Cell": {
+          "Row": 15,
+          "Column": 1
+        },
+
+        "Dock": "Fill",
+        "StateText": "true,false",
+        "XPath": ".//attribute[@name='remove_cms_algorithm_protection_attrib']/@value",
+        "TextAlign": "Left",
+        "Width": 20
+      }
+
     }
-
-
   ]
 }

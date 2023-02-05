@@ -42,9 +42,12 @@
             this.tlpDyna1 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnUpdatePartnership = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblPartnershipfile = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnTestJson = new System.Windows.Forms.Button();
             this.btnGenerateSchema = new System.Windows.Forms.Button();
+            this.btnTestJson = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -72,10 +75,11 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 506F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 286F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 296F));
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 578F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Controls.Add(this.label9, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
@@ -85,6 +89,9 @@
             this.tableLayoutPanel2.Controls.Add(this.cmbPartnershipFlavor, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 2, 4);
             this.tableLayoutPanel2.Controls.Add(this.tlpDyna1, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.btnUpdatePartnership, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label4, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblPartnershipfile, 2, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 38);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -95,7 +102,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 411F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -113,9 +120,9 @@
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(795, 0);
+            this.label9.Location = new System.Drawing.Point(513, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(290, 30);
+            this.label9.Size = new System.Drawing.Size(572, 30);
             this.label9.TabIndex = 11;
             this.label9.Text = "Implementation flavour";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -125,9 +132,9 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(509, 0);
+            this.label2.Location = new System.Drawing.Point(250, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(280, 30);
+            this.label2.Size = new System.Drawing.Size(257, 30);
             this.label2.TabIndex = 1;
             this.label2.Text = "Receiver";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -139,7 +146,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(500, 30);
+            this.label1.Size = new System.Drawing.Size(241, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "Sender";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,24 +155,24 @@
             // 
             this.cmbPartnershipSender.Dock = System.Windows.Forms.DockStyle.Right;
             this.cmbPartnershipSender.FormattingEnabled = true;
-            this.cmbPartnershipSender.Location = new System.Drawing.Point(263, 33);
+            this.cmbPartnershipSender.Location = new System.Drawing.Point(25, 33);
             this.cmbPartnershipSender.Name = "cmbPartnershipSender";
-            this.cmbPartnershipSender.Size = new System.Drawing.Size(240, 23);
+            this.cmbPartnershipSender.Size = new System.Drawing.Size(219, 23);
             this.cmbPartnershipSender.TabIndex = 2;
             this.cmbPartnershipSender.Tag = "sender";
-            this.cmbPartnershipSender.SelectedIndexChanged += new System.EventHandler(this.cmbPartnershipSender_SelectedIndexChanged);
+            this.cmbPartnershipSender.SelectedIndexChanged += new System.EventHandler(this.cmbPartnershipSelectedIndexChanged);
             // 
             // cmbPartnershipReceiver
             // 
             this.cmbPartnershipReceiver.FormattingEnabled = true;
-            this.cmbPartnershipReceiver.Location = new System.Drawing.Point(509, 33);
+            this.cmbPartnershipReceiver.Location = new System.Drawing.Point(250, 33);
             this.cmbPartnershipReceiver.Name = "cmbPartnershipReceiver";
-            this.cmbPartnershipReceiver.Size = new System.Drawing.Size(280, 23);
+            this.cmbPartnershipReceiver.Size = new System.Drawing.Size(250, 23);
             this.cmbPartnershipReceiver.TabIndex = 3;
             this.cmbPartnershipReceiver.Tag = "receiver";
             this.toolTip1.SetToolTip(this.cmbPartnershipReceiver, "The partnership  defines the  \'Receiver\' compatibilty options based on \'Implement" +
         "ation flavour\'. \r\n");
-            this.cmbPartnershipReceiver.SelectedIndexChanged += new System.EventHandler(this.cmbPartnershipReceiver_SelectedIndexChanged);
+            this.cmbPartnershipReceiver.SelectedIndexChanged += new System.EventHandler(this.cmbPartnershipSelectedIndexChanged);
             // 
             // tableLayoutPanel4
             // 
@@ -179,20 +186,20 @@
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(242, 23);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(219, 23);
             this.tableLayoutPanel4.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 23);
+            this.label3.Size = new System.Drawing.Size(76, 23);
             this.label3.TabIndex = 4;
             this.label3.Text = "Partnership";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.label3, "The partnership  defines the  \'Receiver\' compatibilty options based on \'Implement" +
         "ation flavour\'. \r\n");
             // 
@@ -202,9 +209,9 @@
             this.lblPartnership.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPartnership.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblPartnership.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPartnership.Location = new System.Drawing.Point(94, 0);
+            this.lblPartnership.Location = new System.Drawing.Point(85, 0);
             this.lblPartnership.Name = "lblPartnership";
-            this.lblPartnership.Size = new System.Drawing.Size(145, 23);
+            this.lblPartnership.Size = new System.Drawing.Size(131, 23);
             this.lblPartnership.TabIndex = 5;
             this.lblPartnership.Text = "xxxxxxxxxxxxxxxxxxxx";
             this.lblPartnership.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -220,7 +227,7 @@
             "Oracle B2B",
             "Amazon",
             "OpenAS2"});
-            this.cmbPartnershipFlavor.Location = new System.Drawing.Point(795, 33);
+            this.cmbPartnershipFlavor.Location = new System.Drawing.Point(513, 33);
             this.cmbPartnershipFlavor.Name = "cmbPartnershipFlavor";
             this.cmbPartnershipFlavor.Size = new System.Drawing.Size(274, 23);
             this.cmbPartnershipFlavor.TabIndex = 8;
@@ -234,18 +241,18 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.32895F));
             this.tableLayoutPanel3.Controls.Add(this.btnConfirm, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnSavePartnership, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 582);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(1091, 126);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.90909F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(248, 2);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(14, 2);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
             // btnConfirm
             // 
             this.btnConfirm.Location = new System.Drawing.Point(3, 3);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(55, 1);
+            this.btnConfirm.Size = new System.Drawing.Size(1, 1);
             this.btnConfirm.TabIndex = 6;
             this.btnConfirm.Text = "Confirm";
             this.toolTip1.SetToolTip(this.btnConfirm, "The partnership  defines the  \'Receiver\' compatibilty options based on \'Implement" +
@@ -255,9 +262,9 @@
             // 
             // btnSavePartnership
             // 
-            this.btnSavePartnership.Location = new System.Drawing.Point(64, 3);
+            this.btnSavePartnership.Location = new System.Drawing.Point(6, 3);
             this.btnSavePartnership.Name = "btnSavePartnership";
-            this.btnSavePartnership.Size = new System.Drawing.Size(75, 1);
+            this.btnSavePartnership.Size = new System.Drawing.Size(5, 1);
             this.btnSavePartnership.TabIndex = 0;
             this.btnSavePartnership.Text = "Save";
             this.btnSavePartnership.UseVisualStyleBackColor = true;
@@ -265,24 +272,23 @@
             // 
             // tlpDyna1
             // 
-            this.tlpDyna1.AutoScroll = true;
             this.tlpDyna1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tlpDyna1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tlpDyna1.ColumnCount = 2;
             this.tableLayoutPanel2.SetColumnSpan(this.tlpDyna1, 3);
-            this.tlpDyna1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpDyna1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpDyna1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 957F));
+            this.tlpDyna1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
+            this.tlpDyna1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1002F));
             this.tlpDyna1.Controls.Add(this.checkBox1, 0, 0);
             this.tlpDyna1.Controls.Add(this.textBox1, 0, 1);
             this.tlpDyna1.Location = new System.Drawing.Point(3, 92);
             this.tlpDyna1.Name = "tlpDyna1";
-            this.tlpDyna1.RowCount = 3;
+            this.tlpDyna1.RowCount = 4;
             this.tableLayoutPanel2.SetRowSpan(this.tlpDyna1, 3);
             this.tlpDyna1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpDyna1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpDyna1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpDyna1.Size = new System.Drawing.Size(1065, 94);
+            this.tlpDyna1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpDyna1.Size = new System.Drawing.Size(1082, 484);
             this.tlpDyna1.TabIndex = 14;
             // 
             // checkBox1
@@ -300,37 +306,76 @@
             this.textBox1.Location = new System.Drawing.Point(4, 35);
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.Size = new System.Drawing.Size(156, 23);
             this.textBox1.TabIndex = 1;
+            // 
+            // btnUpdatePartnership
+            // 
+            this.btnUpdatePartnership.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnUpdatePartnership.Location = new System.Drawing.Point(3, 582);
+            this.btnUpdatePartnership.Name = "btnUpdatePartnership";
+            this.btnUpdatePartnership.Size = new System.Drawing.Size(241, 41);
+            this.btnUpdatePartnership.TabIndex = 15;
+            this.btnUpdatePartnership.Text = "Update partnership ";
+            this.btnUpdatePartnership.UseVisualStyleBackColor = true;
+            this.btnUpdatePartnership.Click += new System.EventHandler(this.btnUpdatePartnership_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(250, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(257, 29);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Partnership file location";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.label4, "Click to change the folder");
+            // 
+            // lblPartnershipfile
+            // 
+            this.lblPartnershipfile.AutoSize = true;
+            this.lblPartnershipfile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPartnershipfile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPartnershipfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblPartnershipfile.Location = new System.Drawing.Point(513, 60);
+            this.lblPartnershipfile.Name = "lblPartnershipfile";
+            this.lblPartnershipfile.Size = new System.Drawing.Size(572, 29);
+            this.lblPartnershipfile.TabIndex = 17;
+            this.lblPartnershipfile.Text = "Partnerships.xml";
+            this.lblPartnershipfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.lblPartnershipfile, "Click to change the folder");
+            this.lblPartnershipfile.Click += new System.EventHandler(this.lblPartnershipfile_Click);
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnTestJson);
             this.flowLayoutPanel1.Controls.Add(this.btnGenerateSchema);
+            this.flowLayoutPanel1.Controls.Add(this.btnTestJson);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1081, 29);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
-            // btnTestJson
-            // 
-            this.btnTestJson.Location = new System.Drawing.Point(3, 3);
-            this.btnTestJson.Name = "btnTestJson";
-            this.btnTestJson.Size = new System.Drawing.Size(74, 29);
-            this.btnTestJson.TabIndex = 1;
-            this.btnTestJson.Text = "Test Json";
-            this.btnTestJson.UseVisualStyleBackColor = true;
-            this.btnTestJson.Click += new System.EventHandler(this.btnTestJson_Click);
-            // 
             // btnGenerateSchema
             // 
-            this.btnGenerateSchema.Location = new System.Drawing.Point(83, 3);
+            this.btnGenerateSchema.Location = new System.Drawing.Point(3, 3);
             this.btnGenerateSchema.Name = "btnGenerateSchema";
             this.btnGenerateSchema.Size = new System.Drawing.Size(120, 29);
             this.btnGenerateSchema.TabIndex = 2;
             this.btnGenerateSchema.Text = "Generate Schema";
             this.btnGenerateSchema.UseVisualStyleBackColor = true;
             this.btnGenerateSchema.Click += new System.EventHandler(this.btnGenerateSchema_Click);
+            // 
+            // btnTestJson
+            // 
+            this.btnTestJson.Location = new System.Drawing.Point(129, 3);
+            this.btnTestJson.Name = "btnTestJson";
+            this.btnTestJson.Size = new System.Drawing.Size(106, 26);
+            this.btnTestJson.TabIndex = 1;
+            this.btnTestJson.Text = "Test Json";
+            this.btnTestJson.UseVisualStyleBackColor = true;
             // 
             // toolTip1
             // 
@@ -388,5 +433,8 @@
         private System.Windows.Forms.Button btnGenerateSchema;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnUpdatePartnership;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblPartnershipfile;
     }
 }

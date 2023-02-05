@@ -52,6 +52,6 @@
     </None>
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties containercontrols_1json__JsonSchema="containerControls.schema.json" containercontrols_1schema_1json__JsonSchema="containerControls.schema.schema.json" sample_1json__JsonSchema="containerControls.schema.json" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties containercontrols_1json__JsonSchema="containerControls.schema2.json" containercontrols_1schema_1json__JsonSchema="containerControls.schema.schema.json" sample_1json__JsonSchema="containerControls.schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

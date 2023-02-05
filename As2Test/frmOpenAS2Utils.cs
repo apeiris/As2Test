@@ -93,17 +93,14 @@ namespace As2Test
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
-
             setConfigPath();
             lblKeyStore.Text = Properties.Settings.Default.keyStoreFile;
             lblEDIFilePath.Text = Properties.Settings.Default.x12FileName;
             if (File.Exists(lblEDIFilePath.Text)) txtEDI.Text = File.ReadAllText(lblEDIFilePath.Text);
             partnerFromTable = SelectFromDb("select * from dbo.ftPartners();");
             partnerToTable = SelectFromDb("select * from dbo.ftPartners();");
-            string fName = getPartnershipFilename();
-            partnshipXDocument = XDocument.Load(fName); 
+            partnshipXDocument = XDocument.Load(getPartnershipsFilename());
+
             lbxPartnerFrom.DisplayMember = lbxPartnerTo.DisplayMember = "Name";
             lbxPartnerFrom.DataSource = partnerFromTable;
             lbxPartnerFrom.SetSelected(lbxPartnerFrom.FindString(Properties.Settings.Default.sender), true);
@@ -112,10 +109,6 @@ namespace As2Test
 
             Debug.WriteLine($"properties.defaul Sender ={Properties.Settings.Default.sender} recever={Properties.Settings.Default.receiver}");
             tabControl1.SelectedIndex = (int)tabs.tbpPartners;
-           
-          
-
-
         }
         private string _editext;
         string editext { get { return _editext; } set { _editext = value; } }
@@ -154,28 +147,6 @@ namespace As2Test
                     Properties.Settings.Default.Save();
                 }
             }
-        }
-        private void btnSendFile(object sender, EventArgs e)
-        {
-            txtEDI.Text = "";
-            byte[] byteArray;
-            // string fname = @"C:\data\EDI\MyComapny_OID-PartnerA_OID-OrderID-745634.edi";
-            string fname = lblEDIFilePath.Text;
-            using (FileStream SourceStream = File.Open(fname, FileMode.Open))
-            {
-                byteArray = new byte[SourceStream.Length];
-                SourceStream.Read(byteArray, 0, (int)SourceStream.Length);
-                //await SourceStream.ReadAsync(byteArray, 0, (int)SourceStream.Length);
-            }
-
-
-            ProxySettings proxy = new ProxySettings();
-            Uri uri = new Uri("http://localhost:10080");
-
-
-
-            AS2 as2 = new AS2(Properties.Settings.Default.keyStoreFile, Properties.Settings.Default.CertStorePassword);
-
         }
         private void lblEDIFilePath_MouseEnter(object sender, EventArgs e)
         {
@@ -277,47 +248,14 @@ namespace As2Test
         {
 
         }
-        private void btnDecrypt_Click(object sender, EventArgs e)
-        {
-            /*
-            string storefname = Properties.Settings.Default.keyStoreFile;
-            string storePass = Properties.Settings.Default.CertStorePassword;
-            X509Certificate2? cert = AS2MIMEUtilities.GetCertificateFromStore(storefname, storePass, lbxPartnerTo.Text.ToLower());
-            // var x=cert.GetRSAPrivateKey();
-            // RSAParameters rpr
-
-            //txtEncrypted.Text = Encoding.Default.GetString(x.Decrypt(baEncrypted, RSAEncryptionPadding.OaepSHA256));
-
-
-            EnvelopedCms cms = new EnvelopedCms();
-            cms.Decode(baEncrypted);
-            cms.Decrypt();
-
-            byte[] ba = cms.Encode();
-
-            Debug.WriteLine($"here={Encoding.UTF8.GetString(ba)}");
-            */
-
-        }
         private void btnClearLog_Click(object sender, EventArgs e)
         {
             lbxLog.Items.Clear();
         }
-        private async Task getPartnerlistRest()
+        private IList<String> getPartnerListFromFile()
         {
-            var request = new RestRequest("/api/partner/list");
-            var response = await rClient.GetAsync(request, ct);
-            Debug.WriteLine(response.Content.ToString());
-            JObject jo = JObject.Parse(response.Content);
-            JArray partners = (JArray)jo["results"];
-            IList<string> PartnerList = partners.Select(c => (string)c).ToList();
-            lbxPartners.DataSource = PartnerList;
-            lbxPartners.DisplayMember = "String";
-        }
-        private IList<String> getPartnerListFile()
-        {
-            
-         
+            partnshipXDocument = XDocument.Load(getPartnershipsFilename());
+
             // string xp = $"//partner/@name";
             var childList =
                 from el in partnshipXDocument.Root.Descendants("partner")
@@ -341,7 +279,7 @@ namespace As2Test
         }
         private Dictionary<string, string> getPartnerDetails(string pName, string nodeSelectorkey)
         {
-            string fName = getPartnershipFilename();
+            string fName = getPartnershipsFilename();
             XDocument doc = XDocument.Load(fName);
             string xp = $"//partner[@{nodeSelectorkey}='{pName}']";
             XElement xe = doc.XPathSelectElement(xp);
@@ -351,7 +289,7 @@ namespace As2Test
         private void btnGetPartners_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            lbxPartners.DataSource = getPartnerListFile(); ;
+            lbxPartners.DataSource = getPartnerListFromFile(); ;
             Cursor = Cursors.Default;
         }
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -371,17 +309,6 @@ namespace As2Test
                 case (int)tabs.tbpLog:
                     break;
             }
-        }
-        private void getPartnerData(string partner)
-        {
-
-            //var request = new RestRequest($"/api/partner/view/{partner}");
-            ////var response = await rClient.GetAsync(request, ct);
-            //var response = rClient.Get(request);
-            //JObject jo = JObject.Parse(response.Content);
-
-            //partnerDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(jo["results"][0].ToString());
-            IList<string> l = getPartnerListFile();
         }
         private void lbxPartners_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -404,22 +331,14 @@ namespace As2Test
 
 
         }
-        private void clearPartnerfields()
-        {
-            txtPartnerAs2Id.Text = "";
-            txtPartnerEmail.Text = "";
-            txtPartnerName.Text = "";
-            txtPartnerX509Alias.Text = "";
-
-        }
         private XmlDocument getPartnerXmlDocument(ref string fName)
         {
             XmlDocument doc = new XmlDocument();
-            fName = getPartnershipFilename();
+            fName = getPartnershipsFilename();
             doc.Load(fName);
             return doc;
         }
-        private string getPartnershipFilename()
+        private string getPartnershipsFilename()
         {
             return AS2configPath + "\\partnerships.xml";
         }
@@ -438,8 +357,7 @@ namespace As2Test
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.Indent = true;
             XmlWriter w = XmlWriter.Create(fName, ws);
-
-            doc.Save(w);
+           doc.Save(w);
             w.Close();
         }
         private void btnPartnerUpdate_Click(object sender, EventArgs e)
@@ -450,7 +368,7 @@ namespace As2Test
             dic.Add("as2_id", txtPartnerAs2Id.Text);
             dic.Add("email", txtPartnerEmail.Text);
             dic.Add("x509_alias", txtPartnerX509Alias.Text);
-            using (frmdPartner f = new frmdPartner(ref dic, Properties.Settings.Default.partnerNodeSelecter, "Update Partner"))
+            using (frmdPartner f = new frmdPartner(ref dic, Properties.Settings.Default.partnerNodeSelecter, "Update Partner",ref lbxPartners))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
@@ -464,7 +382,7 @@ namespace As2Test
         }
         private void deletPartnerXml(string partnerName)
         {
-            string fName = getPartnershipFilename();
+            string fName = getPartnershipsFilename();
             string xp = $"//partner[@name='{partnerName}']";
             XDocument doc = XDocument.Load(fName);
             var partner = (XElement)doc.XPathSelectElements(xp).First();
@@ -496,7 +414,7 @@ namespace As2Test
         }
         private void addPartnerXml(Dictionary<string, string> dic, string nodeSelecterKey)
         {
-            string fName = getPartnershipFilename();
+            string fName = getPartnershipsFilename();
             string xp = $"//partner[last()]";
             XDocument doc = XDocument.Load(fName);
             var partner = (XElement)doc.XPathSelectElements(xp).First();
@@ -512,8 +430,9 @@ namespace As2Test
         }
         private void btnPartnerAddNew_Click(object sender, EventArgs e)
         {
+          //  if(lbxPartners.Items.Contains)
             partnerDic.Clear();
-            using (frmdPartner f = new frmdPartner(ref partnerDic, Properties.Settings.Default.partnerNodeSelecter, "Add Partner"))
+            using (frmdPartner f = new frmdPartner(ref partnerDic, Properties.Settings.Default.partnerNodeSelecter, "Add Partner",ref lbxPartners))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
@@ -522,18 +441,25 @@ namespace As2Test
                     txtPartnerX509Alias.Text = f.ldic["x509_alias"];
                     txtPartnerEmail.Text = f.ldic["email"];
                     addPartnerXml(f.ldic, "");
+                    
                     btnGetPartners_Click(null, null);
                 };
             }
         }
         private void btnParnterShipAdd_Click(object sender, EventArgs e)
-        {
+        { 
+            
+
             if(partnersList.Count < 2) { 
                 MessageBox.Show("Minimum of 2 partners are required to define partnership..!"); 
                 return;
             
             }
-            using (frmPartnership f = new frmPartnership(ref partnshipXDocument,ref partnersList,ref partnershipsList, Properties.Settings.Default.parntershipNodeSelector))
+            
+
+            XmlDocument partnershipsXdoc = new XmlDocument();
+            partnershipsXdoc.Load(getPartnershipsFilename());
+            using (frmPartnership f = new frmPartnership(ref partnershipsXdoc, ref partnersList,ref partnershipsList, Properties.Settings.Default.parntershipNodeSelector))
             {
             if(f.ShowDialog()==DialogResult.OK)
                 {
@@ -542,6 +468,7 @@ namespace As2Test
             
             }
         }
+
     }
 }
 

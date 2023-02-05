@@ -19,9 +19,9 @@ using System.Web;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Xml.XPath;
+using System.Xml.Linq;
 using System.Text.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema.Generation;
@@ -29,6 +29,7 @@ using Newtonsoft.Json.Schema;
 using Newtonsoft.Json;
 using System.Collections.Immutable;
 using System.Net.NetworkInformation;
+using As2Test.Properties;
 
 namespace As2Test
 {
@@ -44,240 +45,55 @@ namespace As2Test
     }
     public partial class frmPartnership : Form
     {
-
+        static JObject data = JObject.Parse(File.ReadAllText("containerControls.json"));
         string[] partners = null;
         string[] partnerships = null;
         static bool uiShown = false;
-        XDocument partnershipXDoc = null;
-        static Dictionary<string, string> pnlFieldsVars = new Dictionary<string, string>();
-        static TableLayoutPanel container;
+        XmlDocument partnershipXDoc = null;
+        static Dictionary<string, Control> containerLinkedControls = new Dictionary<string, Control>();
 
-
-        public frmPartnership(ref XDocument partnershipsXDoc, ref List<string> partnerList, ref List<string> partnershipList, string nodeSelectorName)
+        public frmPartnership(ref XmlDocument partnershipsXDoc, ref List<string> partnerList, ref List<string> partnershipList, string nodeSelectorName)
         {
             InitializeComponent();
             this.partnershipXDoc = partnershipsXDoc;
             partners = new string[partnerList.Count]; partnerList.CopyTo(partners);
             partnerships = new string[partnershipList.Count];
-
             partnershipList.CopyTo(partnerships);
-
-
             cmbPartnershipSender.DataSource = partnerList;
             cmbPartnershipReceiver.DataSource = partners;
             cmbPartnershipSender.SelectedIndex = 0;
             cmbPartnershipReceiver.SelectedIndex = 1;
         }
-        static void setupDynamicControls(object sender, string ps)
-        {
-            var a = Assembly.GetExecutingAssembly();
-            string resname = $"{a.GetName().Name}.Resources.controlsfrmPartnerships.xml";
-            var d = XDocument.Load(a.GetManifestResourceStream(resname));
-            var cn = d.Root.Attribute("panel").Value; //container name where elements are added
-            var container = (Control)sender;
-            IEnumerable<XElement> children =
-                from e in d.XPathSelectElements("//c") // all rows 
-                select e;
-            int row = 0;
-            int col = 0;
-            int rowCount = children.Count();
-            string controlXpath = "";
-            Control p = container.Controls[0];
-            foreach (XElement child in children)
-            {
-                col = col % 2;
-                controlXpath = $"//c[@r={row}][@c={col}]";
-
-                Dictionary<string, string> cdic = xtattribs.XElementAttributes(child, controlXpath);
-                if ((col % 2) == 1) { row++; };
-                col++;
-                if (cdic != null)
-                    addControl(container, cn, cdic, sender, p);
-            }
-
-        }
-
-        private static void addControl(Control parentControls, string containerName, Dictionary<string, string> ctlDef, object sender, object p)
-        {
-            container = (TableLayoutPanel)parentControls.Controls.Find(containerName, true).FirstOrDefault();
-            container.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-            container.RowStyles.Add(new RowStyle(SizeType.Absolute, 20));
-            container.ControlAdded += dynaControlAdded;
-            string sControlType = ctlDef["t"].ToLower();
-            ctlDef.Remove(sControlType);
-
-            int col = int.Parse(ctlDef["c"]);
-            int row = int.Parse(ctlDef["r"]);
-            var control = new Control(); //  dictControls[sControlType];
-            switch (sControlType)
-            {
-                case "label":
-                    control = (Label)new Label();
-                    if (ctlDef.ContainsKey("a"))
-                        switch (ctlDef["a"])
-                        {
-                            case "r": ((Label)control).TextAlign = System.Drawing.ContentAlignment.MiddleLeft; break;
-                            default:
-                                ((Label)control).TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                                ((Label)control).AutoSize = true;
-                                ((Label)control).Dock = DockStyle.Fill;
-                                ((Label)control).MaximumSize = new Size(1000, 30);
-                                break;
-                        }
-                    break;
-                case "textbox":
-                    control = (TextBox)new TextBox();
-                    ((TextBox)control).AutoSize = true;
-                    if (ctlDef.ContainsKey("l")) ((TextBox)control).Size = new Size(int.Parse(ctlDef["l"]), 30);
-                    ((TextBox)control).TextAlign = HorizontalAlignment.Left;
-                    ((TextBox)control).PlaceholderText = ctlDef["text"]; break;
-                default: break;
-            }
-            if (ctlDef.ContainsKey("a"))
-                switch (ctlDef["a"].ToLower())
-                {
-                    case "r": control.Anchor = AnchorStyles.Right; break;
-                    default: control.Anchor = AnchorStyles.Left; break;
-                }
-            if (ctlDef.ContainsKey("f"))//  font
-            {
-                Font f = new Font(control.Font, FontStyle.Regular);
-                string sw = ctlDef["f"].ToLower().Trim(' ')[0].ToString();
-                switch (sw)
-                {
-                    case "b":
-                        control.Font = new Font(control.Font, FontStyle.Bold);
-                        break;
-                    // MessageBox.Show(ctlDef["f"][0].ToString());
-                    case "{":
-                        /*
-                         * 
-                         *  {style=b,fcolor=red,size=20}
-                         *  
-                         *  
-                         */
-                        // Dictionary<string, string> fa = ctlDef["f"].Split(new char[] { '{', '}', ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        //       .ToDictionary(str => str.Split(new char[] { '=', })[0], str => str.Split(new char[] { '=' })[1]);
-
-                        Dictionary<string, string> fa = ctlDef["f"].Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries).
-
-                            ToDictionary(str => str.Split(new char[] { '=' })[0], str => str.Split(new char[] { '=' })[1]);
-
-
-
-                        string s = control.Font.ToString();
-                        foreach (KeyValuePair<string, string> kvp in fa)
-                            switch (kvp.Key)
-                            {
-                                case "style" when kvp.Value == "b" || kvp.Value == "bold":
-                                    var fontStyle = (FontStyle)Enum.Parse((typeof(FontStyle)), "Bold");
-                                    control.Font = new Font(control.Font, fontStyle);
-
-                                    break;
-                                case "style" when kvp.Value == "italic":
-                                    control.Font = new Font(control.Font, FontStyle.Italic);
-                                    break;
-                                case "fcolor" when kvp.Value != string.Empty:
-                                    control.ForeColor = Color.FromName(kvp.Value);
-                                    break;
-                                case "size" when kvp.Value != string.Empty:
-                                    control.Font = new Font(control.Font.Name, float.Parse(kvp.Value));
-                                    break;
-                            }
-                        break;
-
-                    default: break;
-                }
-
-
-
-            }
-            if (ctlDef.ContainsKey("text"))
-            {
-                if (ctlDef["text"].Contains("${"))
-                {
-                    pnlFieldsVars.Add(ctlDef["text"].Split(new char[] { '$', '{', '}' }, StringSplitOptions.RemoveEmptyEntries)[0], $"{ctlDef["r"]}:{ctlDef["c"]}");
-
-                };
-            }
-
-            control.Text = ctlDef["text"];
-            add_toContainer(container, col, row, control);
-            container.ControlAdded -= dynaControlAdded;
-        }
-        private static void add_toContainer(TableLayoutPanel container, int col, int row, Control control)
-        {
-            container.SuspendLayout();
-            container.AutoSize = true;
-            container.Controls.Add(control, col, row);
-
-            container.ResumeLayout();
-
-        }
-        private static void dynaControlAdded(object sender, ControlEventArgs e)
-        {
-            var x = (TableLayoutPanel)sender;
-            e.Control.Visible = true;
-            TableLayoutPanelCellPosition p = x.GetPositionFromControl(e.Control);
-            Debug.WriteLine($"@dynC rcount= {x.RowCount}[{e.Control.GetType().Name}:text= {e.Control.Text} cCxR {p.Column},{p.Row}");
-
-        }
         private void frmPartnership_Load(object sender, EventArgs e)
         {
-            cmbPartnershipFlavor.SelectedIndex = 0;
-
-            setupDynamicControls(sender, lblPartnership.Text);
-
-
-
+            cmbPartnershipFlavor.SelectedIndex = 0;       
+            LoadJSON();
         }
         private void setPartnershipLabel(string From, string To)
         {
             lblPartnership.Text = From + "-to-" + To;
 
         }
-        private void cmbPartnershipSender_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbPartnershipSelectedIndexChanged(object sender, EventArgs e)
         {
             if (!uiShown) return;
             ComboBox x = (ComboBox)sender;
             if (x.SelectedItem != null)
-            {
-                if (cmbPartnershipReceiver.SelectedIndex == x.SelectedIndex)
-                {
-                    MessageBox.Show($"Sender and the receiver can not be the same..");
-                    return;
-                }
-                if (pnlFieldsVars.ContainsKey(x.Name)) { setVariable(x); }
-                setPartnershipLabel(x.Text, cmbPartnershipReceiver.Text);
-            }
-        }
-        private static void setVariable(ComboBox x)
-        {
-            string[] xy = pnlFieldsVars[x.Name].Split(':', StringSplitOptions.RemoveEmptyEntries);
-            container.GetControlFromPosition(int.Parse(xy[1]), int.Parse(xy[0])).Text = x.Text;
-        }
-        private void cmbPartnershipReceiver_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!uiShown) return;
-            ComboBox x = (ComboBox)sender;
-            if (x.SelectedItem != null)
-            {
-                if (cmbPartnershipSender.SelectedIndex == x.SelectedIndex)
-                {
-                    MessageBox.Show($"Receiver and the Sender can not be the same..");
-                    return;
-                }
-                if (pnlFieldsVars.ContainsKey(x.Name)) { setVariable(x); }
-            }
 
+            {
+                if (containerLinkedControls.ContainsKey(x.Name))
+                {
+                    containerLinkedControls[x.Name].Text = x.Text;
+                    setPartnershipLabel(cmbPartnershipSender.Text, cmbPartnershipReceiver.Text);
+                }
+            }
         }
         private void frmPartnership_Shown(object sender, EventArgs e)
         {
             uiShown = true;
             setPartnershipLabel(cmbPartnershipSender.Text, cmbPartnershipReceiver.Text);
-            cmbPartnershipSender_SelectedIndexChanged(cmbPartnershipSender, null);
-            cmbPartnershipReceiver_SelectedIndexChanged(cmbPartnershipReceiver, null);
-
+            cmbPartnershipSelectedIndexChanged(cmbPartnershipSender, null);
+            cmbPartnershipSelectedIndexChanged(cmbPartnershipReceiver, null);
         }
         private bool isExistingPartnership(string partnership)
         {
@@ -292,60 +108,26 @@ namespace As2Test
             }
 ;
         }
-        private void chkPollerConfig_CheckedChanged(object sender, EventArgs e)
+        private XmlDocument getPartnershipTemplate()
         {
-            //  chkPollerConfig.Text = chkPollerConfig.Checked ? "Yes" : "No";
-        }
-        private XDocument getPartnershipTemplate()
-        {
-            XDocument doc = XDocument.Load("partnershipTemplate.xml");
-
+            XmlDocument doc = new XmlDocument(); doc.Load("partnershipTemplate.xml");
             return doc;
-        }
-        private void CreatePartnership(string partnershipName)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(partnership));
-            partnership ps = new partnership();
-            ps.name = partnershipName;
-            var settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true };
-            TextWriter writer = new StreamWriter(partnershipName + ".xml");
-            var ns = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
-
-            using (var stringWriter = new StringWriter())
-            {
-                using (var xmlw = XmlWriter.Create(stringWriter, settings))
-                {
-                    serializer.Serialize(xmlw, ps, ns);
-
-                    string s = stringWriter.ToString();
-                    Debug.WriteLine($"xmlw.ToString():{s}");
-                }
-            }
-            writer.Close();
-
-            XDocument doc = getPartnershipTemplate();
-            var xe = doc.XPathSelectElement("//partnership"); // the template has only one partnershio get that
-            xe.SetAttributeValue("name", partnershipName);
-
-            string[] partners = partnershipName.Split("-to-", StringSplitOptions.RemoveEmptyEntries);
-            xe = doc.XPathSelectElement("//partnership/sender");
-            xe.SetAttributeValue("name", partners[0]); //sender  (from)
-
-            xe = doc.XPathSelectElement("//partnership/receiver");
-            xe.SetAttributeValue("name", partners[1]); // 
-
         }
         private void setPartnerAttribute(string attributeName, string attrbuteValue, string partner)
         {
             string xp = $"//partner[@name='{partner}']";
-            XElement xe = this.partnershipXDoc.XPathSelectElement(xp);
-            xe.SetAttributeValue(attributeName, attrbuteValue);
+
+            XmlNode xn = this.partnershipXDoc.SelectSingleNode(xp);
+
+            //xe.SetAttributeValue(attributeName, attrbuteValue);
         }
         private void removePartnershipAttribute(string attributeName, string partnership)
         {
 
             string xp = $"//partnership[@name='{partnership}']/attribute[@name='{attributeName}']";
-            this.partnershipXDoc.XPathSelectElement(xp).Remove();
+            XmlNode xn = this.partnershipXDoc.SelectSingleNode(xp);
+            xn.RemoveAll();
+
         }
         private void btnSavePartnership_Click(object sender, EventArgs e)
         {
@@ -367,15 +149,10 @@ namespace As2Test
             */
             //  XElement xe = new XElement(this.partnershipXDoc);
             //XElement.Parse()
-
             string s = this.partnershipXDoc.ToString();
-       //     webView21.AllowExternalDrop = true;
-
+            //     webView21.AllowExternalDrop = true;
             Uri x = new Uri("file:///C:/Users/mapei/source/repos/As2Test/As2Test/bin/Debug/netcoreapp3.1/emptyPartnership.xml");
-
-
-         //   webView21.Source = x;
-          
+            //   webView21.Source = x;
             switch (cmbPartnershipFlavor.SelectedIndex)
             {
 
@@ -399,23 +176,24 @@ namespace As2Test
                 default:
                     break;
             }
-               
-            CreatePartnership(lblPartnership.Text);
-
+            // CreatePartnership(lblPartnership.Text);
         }
-
-        private void btnTestJson_Click(object sender, EventArgs e)
+        private static List<JToken> ListJsonCControls()
         {
-            JObject data = JObject.Parse(File.ReadAllText("containerControls.json"));
-            List<JToken> cc = data.SelectTokens("controls").Children().ToList();
+            return data.SelectTokens("controls").Children().ToList();
+        }
+        private void LoadJSON()
+        {
+            List<JToken> cc = ListJsonCControls();
             Debug.WriteLine($"Count of Controls ={cc.Count()}");
             var control = new Control();
             var parentControl = new Control();
             Font font;
             TableLayoutPanel container = (TableLayoutPanel)this.Controls.Find("tlpDyna1", true).First();
-           // DataGridView container = new DataGridView();
+            container.SetColumnSpan(container.Parent, 3);
+            container.Width = 900;
+            // DataGridView container = new DataGridView();
             container.Controls.Clear();
-
             var x = "";
             if (!string.IsNullOrEmpty((string)data.SelectToken("$.container.RowStyle.SizeType")))
             {
@@ -429,31 +207,57 @@ namespace As2Test
                 }
             }
             container.ColumnStyles.Clear();
-            container.SetColumnSpan(container.Parent,3  );
+            container.SetColumnSpan(container.Parent, 3);
             List<JToken> columns = data.SelectTokens("$.container.ColumnStyle").Children().ToList();
             int cs = 1;// int.Parse(data.SelectToken("$.container.ColumnSpan").ToString());
-            Debug.WriteLine($"{cs} {columns.Count} parent name={container.Parent.Name}parent");
+                       //   Debug.WriteLine($"{cs} {columns.Count} parent name={container.Parent.Name}parent");
             container.SetColumnSpan(container, 3);
             TableLayoutColumnStyleCollection styles = container.ColumnStyles;
             foreach (JToken colo in columns)
             {
                 ColumnStyle style = new ColumnStyle();
-
-                
                 styles.Add(new ColumnStyle((SizeType)Enum.Parse(typeof(SizeType), (string)colo.SelectToken("SizeType")), float.Parse((string)colo.SelectToken("Width"))));
                 container.ColumnStyles.Add(style);
+                // Debug.WriteLine($"Column type={style.SizeType.ToString()},width={style.Width}");
             }
-
             int row, col = 0;
-            XElement xe = null;
-            XDocument pdocTemplate = getPartnershipTemplate();
+            XmlElement xe = null;
+            XmlDocument pdocTemplate = getPartnershipTemplate();
             foreach (JToken c in cc)
             {
                 Debug.WriteLine($"{c.ToString()}\n");
                 switch (c.SelectToken("..Type").ToString().ToLower())
                 {
+                    case "checkbox":
+                        CheckBox ccontrol = new CheckBox();
+                        // ccontrol.Text = c.SelectToken("..Text").ToString();
+                        x = c.SelectToken("..XPath").ToString();
+                        string sxe = utils.elementAxisOfXpath(x);
+                        string attribute = x.Replace(sxe, "").TrimStart('/');
+
+                        // ccontrol.Checked = xe.XPathSelectAttribute("@enabled").Value == "true" ? true : false;
+                        ccontrol.CheckedChanged += checkBox_CheckedChanged;
+                        ccontrol.Tag = c.SelectToken("..StateText");
+                        control = ccontrol;
+                        checkBox_CheckedChanged(control, null);
+                        break;
+                    case "combobox":
+                        ComboBox cbx = new ComboBox();
+                        object[] xx = c.SelectToken("..Items").ToString().Split(new char[] { '\"', ' ', ',', '\r', '\n', '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
+                        cbx.Items.Clear();
+                        cbx.Items.AddRange(xx);
+                        cbx.Width = 100;
+                        control = cbx;
+                        break;
                     case "label":
                         control = new Label();
+                        string xc = c.SelectToken("..Text").ToString();
+                        if (xc.Contains("${"))
+                        {
+                            string[] ss = xc.Split(new char[] { '$', '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (!containerLinkedControls.ContainsKey(ss[0]))
+                                containerLinkedControls.Add(ss[0], control);
+                        }
                         break;
                     case "textbox":
                         TextBox tcontrol = new TextBox();
@@ -466,35 +270,22 @@ namespace As2Test
                             tcontrol.ScrollBars = (ScrollBars)Enum.Parse(typeof(ScrollBars), (string)c.SelectToken("..ScrollBars"));
                         }
                         //  toolTip1.SetToolTip(tcontrol, null);
+                        control = tcontrol;
 
-                                               
                         break;
                     case "groupbox":
                         parentControl = new GroupBox();
                         x = c.SelectToken("..XPath").ToString();
-                        xe = pdocTemplate.XPathSelectElement(x);
-                        parentControl.Name = xe.Name.LocalName;
+                        XmlNode xn = pdocTemplate.SelectSingleNode(x);
+                        parentControl.Name = xn.LocalName;
                         break;
                     case "radiobutton":
                         break;
-                    case "checkbox":
-                        CheckBox ccontrol = new CheckBox();
-                       // ccontrol.Text = c.SelectToken("..Text").ToString();
-                        x = c.SelectToken("..XPath").ToString();
-                       string sxe= utils.elementAxisOfXpath(x);
-                        string attribute = x.Replace(sxe, "").TrimStart('/');
-                    
-                       // ccontrol.Checked = xe.XPathSelectAttribute("@enabled").Value == "true" ? true : false;
-                        ccontrol.CheckedChanged += checkBox_CheckedChanged;
-                        ccontrol.Tag = c.SelectToken("..StateText");
-                        control = ccontrol;
-                        checkBox_CheckedChanged(control, null);
-                        break;
+
 
                     default:
                         break;
                 }
-
                 if (c.ToString().Contains("Font"))
                 {
                     String? s = (string)c.SelectToken("..Font['Bold']").ToString().ToLower() == "true" ? "Bold" : "Regular";
@@ -513,20 +304,18 @@ namespace As2Test
                 if (control.Text.Contains("xpath{"))
                 {
                     string[] ss = control.Text.Split(new string?[] { "xpath{", "}" }, StringSplitOptions.RemoveEmptyEntries);
-                    control.Text = ((IEnumerable<object>)pdocTemplate.XPathEvaluate(ss[0]))
-                               .OfType<XAttribute>()
-                               .Single()
-                               .Value;
+                    //control.Text = ((IEnumerable<object>)pdocTemplate.XPathEvaluate(ss[0]))
+                    //           .OfType<XAttribute>()
+                    //           .Single()
+                    //           .Value;
+                    control.Text = pdocTemplate.SelectSingleNode(ss[0]).Value;
 
                 }
-
-
+                if (!string.IsNullOrEmpty((string)c.SelectToken("..control.Name"))) control.Name = (string)c.SelectToken("..control.Name");
                 string dock = (string)c.SelectToken("..Dock");
                 if (!string.IsNullOrEmpty(dock))
                     control.Dock = (DockStyle)Enum.Parse(typeof(DockStyle), dock);
-
                 if (!string.IsNullOrEmpty((string)c.SelectToken("..Width"))) control.Width = (int)c.SelectToken("..Width");
-
                 row = int.Parse(c.SelectToken("..Cell.Row").ToString());
                 col = int.Parse(c.SelectToken("..Cell.Column").ToString());
                 if (c.ToString().Contains("ToolTip"))
@@ -543,40 +332,91 @@ namespace As2Test
                                     toolTip1.SetToolTip(control, control.Text);
                                     break;
                             }
-                            // toolTip1.SetToolTip(control, (stri
+                        }
+                        else // tool tip is explicitly defined
+                        {
+                            toolTip1.SetToolTip(control, xx);
                         }
                     }
                 }
-                
+
                 container.Controls.Add(control, col, row);
             }
         }
-
         private void btnGenerateSchema_Click(object sender, EventArgs e)
         {
             JObject data = JObject.Parse(File.ReadAllText("containerControls.json"));
-
-
-
         }
-
-
         private void checkBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!uiShown) return;
+            //  if (!uiShown) return;
             CheckBox c = (CheckBox)sender;
             string[] st = c.Tag.ToString().Split(new char[] { ':', ',' });
             c.Text = c.Checked ? st[0] : st[1];
             c.ForeColor = c.Checked ? Color.Green : Color.Brown;
             c.Refresh();
         }
+        private void lblPartnershipfile_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fb = new FolderBrowserDialog();
+            fb.SelectedPath = Properties.Settings.Default.configPath;
+            fb.ShowDialog();
+            string fn = "Partnerships.xml";
+            string[] files = Directory.GetFiles(fb.SelectedPath, fn);
+            if (files.Count() != 1)
+            {
+                DialogResult result = MessageBox.Show($"There is no {fn} in the selected directory\n There must be one file named {fn}", "", MessageBoxButtons.RetryCancel);
+                if (result == DialogResult.Cancel) return;
+                lblPartnershipfile_Click(null, null);
+            }
+            else
+            {
+                Properties.Settings.Default.Save();
+            }
+        }
+        private void Log(string msg, [CallerLineNumber] int ln = 0, [CallerMemberName] string mn = "", [CallerFilePath] string fp = "")
+        {
+            var sf = new StackTrace().GetFrame(2);
+            string[] fn=fp.Split("\\",StringSplitOptions.RemoveEmptyEntries);
+            Debug.WriteLine($"{msg}:\t{ln}:{fn[fn.Length-1]}");
+            Debug.WriteLine("-".PadRight(80, '='));
+        }
+        private string GetOuterXml(bool HasChildren,string xml)
+        {
+            if (HasChildren)
+            {
+                string[] x=xml.Split(new string[] {"<","/>\r\n",">"},StringSplitOptions.RemoveEmptyEntries);
+                return $"<{x[0]}>";
+            }
+            return xml;
+        }
+        private void btnUpdatePartnership_Click(object sender, EventArgs e)
+        {
+            //copy the template as selected partnership 
+            string fn = Properties.Settings.Default.configPath + "\\" + lblPartnership.Text + ".xml";
+            File.Delete(fn);
+            File.Copy("C:\\Users\\mapei\\source\\repos\\As2Test\\As2Test\\partnershipTemplate.xml", fn, true);
+            XPNav xPartner = new XPNav(fn);
+            xPartner.SetXpathContent("partnership/@name", lblPartnership.Text);
+            // update the partner selections and save
+            List<JToken> ccTokens = ListJsonCControls();
+            int col, row = 0;
+            foreach (JToken token in ccTokens)
+            {
+                if (token.SelectToken("..XPath") != null)
+                {
+                    col = int.Parse(token.SelectToken("..Cell.Column").ToString());
+                    row = int.Parse(token.SelectToken("..Cell.Row").ToString());
+                    Control c = tlpDyna1.GetControlFromPosition(col, row);
+                    string xPath = token.SelectToken("..XPath").ToString();
+                    xPartner.SetXpathContent(xPath, c.Text);
 
+                    Log($"{c.GetType().Name}:R,C={row},{col} : text= {c.Text} : xpath={xPath} : {c.GetType().Name} ");
+                }
+            }
+            xPartner.Save();
+           string s1=xPartner.MergeToParentDocument(parentfilePath:Settings.Default.configPath+"//partnerships.xml",deleteIfExist: $"//partnerships/partnership[@name='{lblPartnership.Text}']",autoSave: true);
+        }
     }
-    [XmlRootAttribute("partnership", Namespace = null, IsNullable = false)]
-    public class partnership
-    {
-        [XmlAttribute("name")]
-        public string name;
 
-    }
 }

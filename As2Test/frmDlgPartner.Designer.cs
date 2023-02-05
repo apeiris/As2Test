@@ -178,6 +178,7 @@
             this.txtdPartnerName.Size = new System.Drawing.Size(399, 23);
             this.txtdPartnerName.TabIndex = 5;
             this.txtdPartnerName.WordWrap = false;
+            this.txtdPartnerName.Leave += new System.EventHandler(this.txtdPartnerName_Leave);
             // 
             // tableLayoutPanel3
             // 

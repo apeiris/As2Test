@@ -51,6 +51,7 @@ namespace As2Test
             this.lbxPartnerTo = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbpPartners = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
@@ -59,11 +60,6 @@ namespace As2Test
             this.btnPartnershipDelete = new System.Windows.Forms.Button();
             this.btnPartnershipModify = new System.Windows.Forms.Button();
             this.btnParnterShipAdd = new System.Windows.Forms.Button();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.lbxPartnerShips = new System.Windows.Forms.ListBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lbxPartners = new System.Windows.Forms.ListBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.txtPartnerEmail = new System.Windows.Forms.TextBox();
             this.txtPartnerX509Alias = new System.Windows.Forms.TextBox();
@@ -79,6 +75,13 @@ namespace As2Test
             this.btnParnterToggleOp = new System.Windows.Forms.Button();
             this.btnPartnerUpdate = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lbxPartnerShips = new System.Windows.Forms.ListBox();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbxPartners = new System.Windows.Forms.ListBox();
             this.tbpLog = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -86,7 +89,6 @@ namespace As2Test
             this.btnClearLog = new System.Windows.Forms.Button();
             this.lbxLog = new System.Windows.Forms.ListBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tbpSendRcv.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -95,9 +97,11 @@ namespace As2Test
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
             this.tbpLog.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -381,6 +385,13 @@ namespace As2Test
             this.label4.Text = "Partners";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(396, 478);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.TabIndex = 24;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tbpSendRcv);
@@ -417,6 +428,7 @@ namespace As2Test
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.52773F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.47228F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1327, 523);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
@@ -426,14 +438,15 @@ namespace As2Test
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 593F));
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel10, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel8, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel10, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowCount = 3;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.13158F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(813, 456);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
@@ -442,11 +455,11 @@ namespace As2Test
             this.tableLayoutPanel7.ColumnCount = 3;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.8982F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.1018F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel7.Controls.Add(this.btnPartnershipDelete, 2, 0);
             this.tableLayoutPanel7.Controls.Add(this.btnPartnershipModify, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.btnParnterShipAdd, 0, 0);
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 373);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 353);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.29578F));
@@ -456,94 +469,34 @@ namespace As2Test
             // 
             // btnPartnershipDelete
             // 
-            this.btnPartnershipDelete.Location = new System.Drawing.Point(186, 3);
+            this.btnPartnershipDelete.BackColor = System.Drawing.Color.Tan;
+            this.btnPartnershipDelete.Location = new System.Drawing.Point(184, 3);
             this.btnPartnershipDelete.Name = "btnPartnershipDelete";
             this.btnPartnershipDelete.Size = new System.Drawing.Size(78, 33);
             this.btnPartnershipDelete.TabIndex = 5;
             this.btnPartnershipDelete.Text = "Delete";
-            this.btnPartnershipDelete.UseVisualStyleBackColor = true;
+            this.btnPartnershipDelete.UseVisualStyleBackColor = false;
             // 
             // btnPartnershipModify
             // 
-            this.btnPartnershipModify.Location = new System.Drawing.Point(96, 3);
+            this.btnPartnershipModify.BackColor = System.Drawing.Color.Tan;
+            this.btnPartnershipModify.Location = new System.Drawing.Point(95, 3);
             this.btnPartnershipModify.Name = "btnPartnershipModify";
             this.btnPartnershipModify.Size = new System.Drawing.Size(78, 33);
             this.btnPartnershipModify.TabIndex = 4;
             this.btnPartnershipModify.Text = "Modify";
-            this.btnPartnershipModify.UseVisualStyleBackColor = true;
+            this.btnPartnershipModify.UseVisualStyleBackColor = false;
             // 
             // btnParnterShipAdd
             // 
+            this.btnParnterShipAdd.BackColor = System.Drawing.Color.Tan;
             this.btnParnterShipAdd.Location = new System.Drawing.Point(3, 3);
             this.btnParnterShipAdd.Name = "btnParnterShipAdd";
             this.btnParnterShipAdd.Size = new System.Drawing.Size(78, 33);
             this.btnParnterShipAdd.TabIndex = 3;
             this.btnParnterShipAdd.Text = "Add New";
-            this.btnParnterShipAdd.UseVisualStyleBackColor = true;
+            this.btnParnterShipAdd.UseVisualStyleBackColor = false;
             this.btnParnterShipAdd.Click += new System.EventHandler(this.btnParnterShipAdd_Click);
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 1;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Controls.Add(this.lbxPartnerShips, 0, 3);
-            this.tableLayoutPanel10.Controls.Add(this.label12, 0, 2);
-            this.tableLayoutPanel10.Controls.Add(this.lbxPartners, 0, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label11, 0, 0);
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 4;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 131F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 186F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(294, 364);
-            this.tableLayoutPanel10.TabIndex = 1;
-            // 
-            // lbxPartnerShips
-            // 
-            this.lbxPartnerShips.FormattingEnabled = true;
-            this.lbxPartnerShips.ItemHeight = 15;
-            this.lbxPartnerShips.Location = new System.Drawing.Point(3, 180);
-            this.lbxPartnerShips.Name = "lbxPartnerShips";
-            this.lbxPartnerShips.Size = new System.Drawing.Size(288, 169);
-            this.lbxPartnerShips.TabIndex = 4;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.tableLayoutPanel10.SetColumnSpan(this.label12, 2);
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(3, 158);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(288, 15);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Partnerships";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbxPartners
-            // 
-            this.lbxPartners.FormattingEnabled = true;
-            this.lbxPartners.ItemHeight = 15;
-            this.lbxPartners.Location = new System.Drawing.Point(3, 26);
-            this.lbxPartners.Name = "lbxPartners";
-            this.lbxPartners.Size = new System.Drawing.Size(288, 124);
-            this.lbxPartners.TabIndex = 1;
-            this.lbxPartners.SelectedIndexChanged += new System.EventHandler(this.lbxPartners_SelectedIndexChanged);
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.tableLayoutPanel10.SetColumnSpan(this.label11, 2);
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(3, 4);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(288, 15);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Partners";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel8
             // 
@@ -665,40 +618,44 @@ namespace As2Test
             // 
             // btnPartnerDelete
             // 
+            this.btnPartnerDelete.BackColor = System.Drawing.Color.Gainsboro;
             this.btnPartnerDelete.Location = new System.Drawing.Point(170, 3);
             this.btnPartnerDelete.Name = "btnPartnerDelete";
             this.btnPartnerDelete.Size = new System.Drawing.Size(73, 42);
             this.btnPartnerDelete.TabIndex = 2;
             this.btnPartnerDelete.Text = "Delete";
-            this.btnPartnerDelete.UseVisualStyleBackColor = true;
+            this.btnPartnerDelete.UseVisualStyleBackColor = false;
             this.btnPartnerDelete.Click += new System.EventHandler(this.btnPartnerDelete_Click);
             // 
             // btnPartnerAddNew
             // 
+            this.btnPartnerAddNew.BackColor = System.Drawing.Color.Gainsboro;
             this.btnPartnerAddNew.Location = new System.Drawing.Point(3, 3);
             this.btnPartnerAddNew.Name = "btnPartnerAddNew";
             this.btnPartnerAddNew.Size = new System.Drawing.Size(78, 42);
             this.btnPartnerAddNew.TabIndex = 0;
             this.btnPartnerAddNew.Text = "Add New";
-            this.btnPartnerAddNew.UseVisualStyleBackColor = true;
+            this.btnPartnerAddNew.UseVisualStyleBackColor = false;
             this.btnPartnerAddNew.Click += new System.EventHandler(this.btnPartnerAddNew_Click);
             // 
             // btnParnterToggleOp
             // 
+            this.btnParnterToggleOp.BackColor = System.Drawing.Color.Gainsboro;
             this.btnParnterToggleOp.Location = new System.Drawing.Point(249, 3);
             this.btnParnterToggleOp.Name = "btnParnterToggleOp";
             this.btnParnterToggleOp.Size = new System.Drawing.Size(73, 42);
             this.btnParnterToggleOp.TabIndex = 3;
-            this.btnParnterToggleOp.UseVisualStyleBackColor = true;
+            this.btnParnterToggleOp.UseVisualStyleBackColor = false;
             // 
             // btnPartnerUpdate
             // 
+            this.btnPartnerUpdate.BackColor = System.Drawing.Color.Gainsboro;
             this.btnPartnerUpdate.Location = new System.Drawing.Point(87, 3);
             this.btnPartnerUpdate.Name = "btnPartnerUpdate";
             this.btnPartnerUpdate.Size = new System.Drawing.Size(77, 42);
             this.btnPartnerUpdate.TabIndex = 1;
             this.btnPartnerUpdate.Text = "Modify";
-            this.btnPartnerUpdate.UseVisualStyleBackColor = true;
+            this.btnPartnerUpdate.UseVisualStyleBackColor = false;
             this.btnPartnerUpdate.Click += new System.EventHandler(this.btnPartnerUpdate_Click);
             // 
             // label5
@@ -713,6 +670,96 @@ namespace As2Test
             this.label5.TabIndex = 1;
             this.label5.Text = "Partner details";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.BackColor = System.Drawing.Color.Gainsboro;
+            this.tableLayoutPanel10.ColumnCount = 1;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel12, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel11, 0, 0);
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 3;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 155F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 271F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 400F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(294, 344);
+            this.tableLayoutPanel10.TabIndex = 1;
+
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 1;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.Controls.Add(this.label12, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.lbxPartnerShips, 0, 1);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 158);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 2;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.29032F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.70968F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(288, 186);
+            this.tableLayoutPanel12.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Tan;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(3, 3);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(282, 15);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Partnerships";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbxPartnerShips
+            // 
+            this.lbxPartnerShips.BackColor = System.Drawing.Color.Tan;
+            this.lbxPartnerShips.FormattingEnabled = true;
+            this.lbxPartnerShips.ItemHeight = 15;
+            this.lbxPartnerShips.Location = new System.Drawing.Point(3, 24);
+            this.lbxPartnerShips.Name = "lbxPartnerShips";
+            this.lbxPartnerShips.Size = new System.Drawing.Size(282, 154);
+            this.lbxPartnerShips.TabIndex = 4;
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 1;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.Controls.Add(this.label11, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.lbxPartners, 0, 1);
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 2;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.79195F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.20805F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(279, 149);
+            this.tableLayoutPanel11.TabIndex = 0;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(3, 6);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(273, 15);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Partners";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbxPartners
+            // 
+            this.lbxPartners.FormattingEnabled = true;
+            this.lbxPartners.ItemHeight = 15;
+            this.lbxPartners.Location = new System.Drawing.Point(3, 31);
+            this.lbxPartners.Name = "lbxPartners";
+            this.lbxPartners.Size = new System.Drawing.Size(273, 109);
+            this.lbxPartners.TabIndex = 1;
+            this.lbxPartners.SelectedIndexChanged += new System.EventHandler(this.lbxPartners_SelectedIndexChanged);
             // 
             // tbpLog
             // 
@@ -788,13 +835,6 @@ namespace As2Test
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(396, 478);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 24;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -815,11 +855,14 @@ namespace As2Test
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel10.ResumeLayout(false);
-            this.tableLayoutPanel10.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
             this.tbpLog.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -887,6 +930,8 @@ namespace As2Test
         private System.Windows.Forms.Button btnPartnershipModify;
         private System.Windows.Forms.Button btnParnterShipAdd;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
     }
 }
 

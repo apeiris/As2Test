@@ -11,7 +11,7 @@
     "controls": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Anonymous9"
+        "$ref": "#/definitions/Anonymous11"
       }
     }
   },
@@ -24,6 +24,9 @@
         },
         "RowStyle": {
           "$ref": "#/definitions/RowStyle"
+        },
+        "ScrollBars": {
+          "type": "string"
         },
         "ColumnStyle": {
           "type": "array",
@@ -70,10 +73,16 @@
         "Cell": {
           "$ref": "#/definitions/Cell"
         },
+        "Dock": {
+          "type": "string"
+        },
         "Text": {
           "type": "string"
         },
         "TextAlign": {
+          "type": "string"
+        },
+        "ToolTip": {
           "type": "string"
         }
       }
@@ -129,25 +138,54 @@
         },
         "XPath": {
           "type": "string"
+        },
+        "ToolTip": {
+          "type": "string"
         }
       }
     },
     "Anonymous8": {
       "type": "object",
       "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Font": {
+          "$ref": "#/definitions/Font"
+        },
         "Cell": {
           "$ref": "#/definitions/Cell"
         },
         "Dock": {
           "type": "string"
         },
+        "TextAlign": {
+          "type": "string"
+        },
+        "StateText": {
+          "type": "string"
+        },
+        "XPath": {
+          "type": "string"
+        }
+      }
+    },
+    "Anonymous9": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
         "Font": {
           "$ref": "#/definitions/Font"
         },
-        "ScrollBars": {
-          "type": "string"
+        "Cell": {
+          "$ref": "#/definitions/Cell"
         },
-        "Multiline": {
+        "Dock": {
           "type": "string"
         },
         "Text": {
@@ -156,7 +194,33 @@
         "TextAlign": {
           "type": "string"
         },
+        "Width": {
+          "type": "integer"
+        }
+      }
+    },
+    "Anonymous10": {
+      "type": "object",
+      "properties": {
         "Type": {
+          "type": "string"
+        },
+        "Font": {
+          "$ref": "#/definitions/Font"
+        },
+        "Cell": {
+          "$ref": "#/definitions/Cell"
+        },
+        "Dock": {
+          "type": "string"
+        },
+        "StateText": {
+          "type": "string"
+        },
+        "XPath": {
+          "type": "string"
+        },
+        "TextAlign": {
           "type": "string"
         },
         "Width": {
@@ -164,7 +228,7 @@
         }
       }
     },
-    "Anonymous9": {
+    "Anonymous11": {
       "type": "object",
       "properties": {
         "control": {
