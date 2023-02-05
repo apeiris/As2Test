@@ -163,7 +163,7 @@ namespace As2Test
         /// <param name="parentfilePath"></param>
         /// <param name="deleteIfExist"></param>
         /// <param name="autoSave"></param>
-        /// <returns></returns>
+        /// <returns>PARNTERSHIPS outerXml </returns>
         public string MergeToParentDocument(string parentfilePath,string deleteIfExist,bool autoSave=true)
         {
             XmlDocument doc = new XmlDocument();
@@ -171,7 +171,7 @@ namespace As2Test
             XmlNodeList deletenodes=  doc.SelectNodes(deleteIfExist);
             if (deletenodes.Count > 0)  deletenodes[0].ParentNode.RemoveChild(deletenodes[0]);
             XmlDocumentFragment documentFragment = doc.CreateDocumentFragment();
-            documentFragment.InnerXml = OuterXml();
+            documentFragment.InnerXml = OuterXml();// outerxml() is the this instances outerxml which is the child of parentfile
             doc.DocumentElement.AppendChild(documentFragment);
             if (autoSave) doc.Save(parentfilePath);
             return doc.OuterXml;
