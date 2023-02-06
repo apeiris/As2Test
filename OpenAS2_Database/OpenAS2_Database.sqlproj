@@ -137,5 +137,6 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="Security\Permissions.sql" />
+    <Build Include="dbo\bulkloadXmlFile.sql" />
   </ItemGroup>
 </Project>

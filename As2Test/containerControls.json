@@ -189,6 +189,7 @@
     // 4 Content transfer encoding
     {
       "control": {
+        "Name": "lblContentTransferEncoding",
         "Type": "Label",
         "Font": {
           "Name": "Segoe UI Variable",

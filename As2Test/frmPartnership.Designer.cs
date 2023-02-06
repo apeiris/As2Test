@@ -233,6 +233,7 @@
             this.cmbPartnershipFlavor.TabIndex = 8;
             this.toolTip1.SetToolTip(this.cmbPartnershipFlavor, "The partnership  defines the  \'Receiver\' compatibilty options based on \'Implement" +
         "ation flavour\'. \r\n");
+            this.cmbPartnershipFlavor.SelectedIndexChanged += new System.EventHandler(this.cmbPartnershipFlavor_SelectedIndexChanged);
             // 
             // tableLayoutPanel3
             // 
@@ -277,7 +278,7 @@
             this.tlpDyna1.ColumnCount = 2;
             this.tableLayoutPanel2.SetColumnSpan(this.tlpDyna1, 3);
             this.tlpDyna1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
-            this.tlpDyna1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1002F));
+            this.tlpDyna1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1014F));
             this.tlpDyna1.Controls.Add(this.checkBox1, 0, 0);
             this.tlpDyna1.Controls.Add(this.textBox1, 0, 1);
             this.tlpDyna1.Location = new System.Drawing.Point(3, 92);

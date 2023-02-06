@@ -9,7 +9,6 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-
 namespace As2Test
 {
     class xmlUtils
@@ -76,10 +75,8 @@ namespace As2Test
         XPathExpression expr;
         XPathNodeIterator ni;
         readonly string _filename = "";
-        public string FileName
-        {
-            get { return _filename; }
-        }
+        public string FileName { get { return _filename; } }
+        public string OuterXml { get { return docNav.OuterXml; } }
         private void Log(string msg, [CallerLineNumber] int ln = 0, [CallerMemberName] string mn = "", [CallerFilePath] string fp = "")
         {
 
@@ -99,15 +96,8 @@ namespace As2Test
             nav.MoveToRoot();
             Log($"_filename= {_filename}");
         }
-        public XPathNavigator Root {
-            get {  nav.MoveToRoot();
-                return nav;
-                } }
-        public XPathNodeIterator IteratorAtRoot { 
-            get {
-                nav.MoveToRoot();
-                return nav.Select("//."); }
-        }
+        public XPathNavigator Root { get { nav.MoveToRoot(); return nav; } }
+        public XPathNodeIterator IteratorAtRoot{get{nav.MoveToRoot();return nav.Select("//.");}}
         public XPathNodeIterator GetIteratorAt(string xpath)
         {
             try
@@ -148,15 +138,10 @@ namespace As2Test
             nElment.WriteElementString(newElement, value);
             nElment.Close();
         }
-        public string OuterXml()
-        {
-            return docNav.OuterXml;
-        }
         public void Save()
         {
             docNav.Save(_filename);
         }
-
         /// <summary>
         /// deleteIfExist is the XPath axis located in the parenfile xml
         /// </summary>
@@ -164,14 +149,14 @@ namespace As2Test
         /// <param name="deleteIfExist"></param>
         /// <param name="autoSave"></param>
         /// <returns>PARNTERSHIPS outerXml </returns>
-        public string MergeToParentDocument(string parentfilePath,string deleteIfExist,bool autoSave=true)
+        public string MergeToParentDocument(string parentfilePath, string deleteIfExist, bool autoSave = true)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(parentfilePath);
-            XmlNodeList deletenodes=  doc.SelectNodes(deleteIfExist);
-            if (deletenodes.Count > 0)  deletenodes[0].ParentNode.RemoveChild(deletenodes[0]);
+            XmlNodeList deletenodes = doc.SelectNodes(deleteIfExist);
+            if (deletenodes.Count > 0) deletenodes[0].ParentNode.RemoveChild(deletenodes[0]);
             XmlDocumentFragment documentFragment = doc.CreateDocumentFragment();
-            documentFragment.InnerXml = OuterXml();// outerxml() is the this instances outerxml which is the child of parentfile
+            documentFragment.InnerXml = OuterXml;// outerxml is the this instances outerxml which is the child of parentfile
             doc.DocumentElement.AppendChild(documentFragment);
             if (autoSave) doc.Save(parentfilePath);
             return doc.OuterXml;

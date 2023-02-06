@@ -30,6 +30,8 @@ using Newtonsoft.Json;
 using System.Collections.Immutable;
 using System.Net.NetworkInformation;
 using As2Test.Properties;
+using System.Collections.ObjectModel;
+using System.Reflection.Metadata;
 
 namespace As2Test
 {
@@ -51,10 +53,20 @@ namespace As2Test
         static bool uiShown = false;
         XmlDocument partnershipXDoc = null;
         static Dictionary<string, Control> containerLinkedControls = new Dictionary<string, Control>();
-
+        DataTable dtImpFlavour = new DataTable();
         public frmPartnership(ref XmlDocument partnershipsXDoc, ref List<string> partnerList, ref List<string> partnershipList, string nodeSelectorName)
         {
             InitializeComponent();
+            dtImpFlavour.Columns.Add("impfKey", typeof(string));
+            dtImpFlavour.Columns.Add("title", typeof(string));
+            dtImpFlavour.Columns.Add("ignoredRows", typeof(string));// the json controls that are in this row is ignored
+            dtImpFlavour.Columns.Add("help", typeof(string));
+            dtImpFlavour.Rows.Add(new object[] { "openas2", "OpenAS2", "", "" });
+            dtImpFlavour.Rows.Add(new object[] { "ibmsterling", "IBM Sterling", "", "" });
+            dtImpFlavour.Rows.Add(new object[] { "ibmdatapower", "IBM Datapower", "" });
+            dtImpFlavour.Rows.Add(new object[] { "seeburger", "Seeburger", "", "add partner attribute: <attribute name='rename_digest_to_old_name' value='true'" });
+            dtImpFlavour.Rows.Add(new object[] { "oracleb2b", "Oracle Integration B2B", "", "" });
+            dtImpFlavour.Rows.Add(new object[] { "amazon", "Amazon", "5", "Remove compression attribute" });
             this.partnershipXDoc = partnershipsXDoc;
             partners = new string[partnerList.Count]; partnerList.CopyTo(partners);
             partnerships = new string[partnershipList.Count];
@@ -66,7 +78,9 @@ namespace As2Test
         }
         private void frmPartnership_Load(object sender, EventArgs e)
         {
-            cmbPartnershipFlavor.SelectedIndex = 0;       
+            cmbPartnershipFlavor.DataSource = dtImpFlavour;
+            cmbPartnershipFlavor.DisplayMember = "title";
+            cmbPartnershipFlavor.SelectedIndex = 0;
             LoadJSON();
         }
         private void setPartnershipLabel(string From, string To)
@@ -108,9 +122,17 @@ namespace As2Test
             }
 ;
         }
-        private XmlDocument getPartnershipTemplate()
-        {
-            XmlDocument doc = new XmlDocument(); doc.Load("partnershipTemplate.xml");
+        private XmlDocument getPartnershipTemplate(out int[] ignoredRows)
+        {   ignoredRows = null;
+           // if(!uiShown) { return null; }   
+            int i = cmbPartnershipFlavor.SelectedIndex;
+            string partnershipFilename = $"partnershipTemplate_{dtImpFlavour.Rows[i][0]}.xml";
+            string s = dtImpFlavour.Rows[i][2].ToString();
+         
+            if (!string.IsNullOrEmpty(s))
+                ignoredRows = Array.ConvertAll(s.Split(','), int.Parse);
+
+            XmlDocument doc = new XmlDocument(); doc.Load(partnershipFilename);
             return doc;
         }
         private void setPartnerAttribute(string attributeName, string attrbuteValue, string partner)
@@ -192,9 +214,11 @@ namespace As2Test
             TableLayoutPanel container = (TableLayoutPanel)this.Controls.Find("tlpDyna1", true).First();
             container.SetColumnSpan(container.Parent, 3);
             container.Width = 900;
-            // DataGridView container = new DataGridView();
+
             container.Controls.Clear();
             var x = "";
+           
+          
             if (!string.IsNullOrEmpty((string)data.SelectToken("$.container.RowStyle.SizeType")))
             {
                 SizeType st = (SizeType)Enum.Parse(typeof(SizeType), (string)data.SelectToken("$.container.RowStyle.SizeType"));
@@ -222,9 +246,14 @@ namespace As2Test
             }
             int row, col = 0;
             XmlElement xe = null;
-            XmlDocument pdocTemplate = getPartnershipTemplate();
+            int[] ignoredRows = null;
+            XmlDocument pdocTemplate = getPartnershipTemplate(out ignoredRows);   
+            Log("Suspending layout");SuspendLayout();
             foreach (JToken c in cc)
             {
+                row = int.Parse(c.SelectToken("..Cell.Row").ToString());
+                col = int.Parse(c.SelectToken("..Cell.Column").ToString());
+               
                 Debug.WriteLine($"{c.ToString()}\n");
                 switch (c.SelectToken("..Type").ToString().ToLower())
                 {
@@ -308,7 +337,9 @@ namespace As2Test
                     //           .OfType<XAttribute>()
                     //           .Single()
                     //           .Value;
-                    control.Text = pdocTemplate.SelectSingleNode(ss[0]).Value;
+                    XmlNode xn = pdocTemplate.SelectSingleNode(ss[0]);
+                    if (xn != null)
+                        control.Text = xn.Value;
 
                 }
                 if (!string.IsNullOrEmpty((string)c.SelectToken("..control.Name"))) control.Name = (string)c.SelectToken("..control.Name");
@@ -316,8 +347,7 @@ namespace As2Test
                 if (!string.IsNullOrEmpty(dock))
                     control.Dock = (DockStyle)Enum.Parse(typeof(DockStyle), dock);
                 if (!string.IsNullOrEmpty((string)c.SelectToken("..Width"))) control.Width = (int)c.SelectToken("..Width");
-                row = int.Parse(c.SelectToken("..Cell.Row").ToString());
-                col = int.Parse(c.SelectToken("..Cell.Column").ToString());
+  
                 if (c.ToString().Contains("ToolTip"))
                 {
                     if (!string.IsNullOrEmpty((string)c.SelectToken("..ToolTip")))
@@ -339,9 +369,21 @@ namespace As2Test
                         }
                     }
                 }
-
+                if (ignoredRows != null)
+                {
+                    Log($"row={row}");
+                    if (ignoredRows.Contains(row))
+                    {
+                        Log($"row-> {row} is in ignored rows setting control to invisible ");
+                      control.Visible = false;
+                    }
+                    else control.Visible=true;
+                }
                 container.Controls.Add(control, col, row);
+                
             }
+            Log("ResumeLayout");
+            ResumeLayout();
         }
         private void btnGenerateSchema_Click(object sender, EventArgs e)
         {
@@ -377,15 +419,15 @@ namespace As2Test
         private void Log(string msg, [CallerLineNumber] int ln = 0, [CallerMemberName] string mn = "", [CallerFilePath] string fp = "")
         {
             var sf = new StackTrace().GetFrame(2);
-            string[] fn=fp.Split("\\",StringSplitOptions.RemoveEmptyEntries);
-            Debug.WriteLine($"{msg}:\t{ln}:{fn[fn.Length-1]}");
+            string[] fn = fp.Split("\\", StringSplitOptions.RemoveEmptyEntries);
+            Debug.WriteLine($"{msg}:\t{ln}:{fn[fn.Length - 1]}");
             Debug.WriteLine("-".PadRight(80, '='));
         }
-        private string GetOuterXml(bool HasChildren,string xml)
+        private string GetOuterXml(bool HasChildren, string xml)
         {
             if (HasChildren)
             {
-                string[] x=xml.Split(new string[] {"<","/>\r\n",">"},StringSplitOptions.RemoveEmptyEntries);
+                string[] x = xml.Split(new string[] { "<", "/>\r\n", ">" }, StringSplitOptions.RemoveEmptyEntries);
                 return $"<{x[0]}>";
             }
             return xml;
@@ -415,7 +457,12 @@ namespace As2Test
                 }
             }
             xPartner.Save();
-           string s1=xPartner.MergeToParentDocument(parentfilePath:Settings.Default.configPath+"//partnerships.xml",deleteIfExist: $"//partnerships/partnership[@name='{lblPartnership.Text}']",autoSave: true);
+            string s1 = xPartner.MergeToParentDocument(parentfilePath: Settings.Default.configPath + "//partnerships.xml", deleteIfExist: $"//partnerships/partnership[@name='{lblPartnership.Text}']", autoSave: true);
+        }
+
+        private void cmbPartnershipFlavor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadJSON();
         }
     }
 

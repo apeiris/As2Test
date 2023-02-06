@@ -46,12 +46,30 @@
     <None Update="partnershipTemplate.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="partnershipTemplate_Amazon.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="partnershipTemplate_ibmDatapower.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="partnershipTemplate_ibmsterling.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="partnershipTemplate_openas2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="partnershipTemplate_OracleB2B.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="partnershipTemplate_Seeburger.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties containercontrols_1json__JsonSchema="containerControls.schema2.json" containercontrols_1schema_1json__JsonSchema="containerControls.schema.schema.json" sample_1json__JsonSchema="containerControls.schema.json" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties containercontrols_1json__JsonSchema="containerControls.schema2.json" containercontrols_1schema_1json__JsonSchema="containerControls.schema.schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

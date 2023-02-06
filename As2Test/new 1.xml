@@ -1,0 +1,27 @@
+<partnerships><partner name="iris" as2_id="iris" x509_alias="iris" email="mapeiris@nowthis.com" /><partner name="partnera" as2_id="partnera" x509_alias="partnera" email="mapeiris@hotmail.com" /><partner name="partnerb" as2_id="PartnerB" x509_alias="partnerb" email="mapeiris@hotmail.com" /><partner name="c" as2_id="c" x509_alias="c" email="c" /><partnership name="Iris-to-PartnerA"><sender name="iris" /><receiver name="partnera" /><pollerConfig enabled="true" /><attribute name="content_transfer_encoding" value="binary" /><attribute name="compression_type" value="ZLIB" /><attribute name="subject" value="File $attributes.filename$ sent from $sender.name$ to $receiver.name$" /><attribute name="as2_url" value="http://localhost:10080" /><attribute name="as2_mdn_to" value="mapeiris@hotmail.com" /><attribute name="as2_mdn_options" value="signed-receipt-protocol=optional, pkcs7-signature; signed-receipt-micalg=optional, $attribute.sign$" /><attribute name="encrypt" value="3DES" /><attribute name="sign" value="SHA256" /><attribute name="resend_max_retries" value="3" /><attribute name="prevent_canonicalization_for_mic" value="false" /><attribute name="rename_digest_to_old_name" value="false" /><attribute name="remove_cms_algorithm_protection_attrib" value="false" /></partnership><partnership name="PartnerA-to-Iris"><sender name="partnera" /><receiver name="iris" /><attribute name="store_received_file_to" value="$properties.storageBaseDir$/inbox/$msg.receiver.as2_id$/inbox/$msg.sender.as2_id$-$rand.12345$-$msg.content-disposition.filename$" /></partnership><partnership name="Iris-to-PartnerB"><sender name="iris" /><receiver name="partnerb" /><pollerConfig enabled="true" /><attribute name="protocol" value="as2" /><attribute name="content_transfer_encoding" value="8bit" /><attribute name="compression_type" value="ZLIB" /><attribute name="subject" value="File $attributes.filename$ sent from $sender.name$ to $receiver.name$" /><attribute name="as2_url" value="https://as2.partnerb.com:8443" /><attribute name="as2_mdn_to" value="mapeiris@hotmail.com" /><attribute name="as2_mdn_options" value="signed-receipt-protocol=optional, pkcs7-signature; signed-receipt-micalg=optional, $attribute.sign$" /><attribute name="encrypt" value="3DES" /><attribute name="sign" value="SHA1" /><attribute name="resend_max_retries" value="3" /><attribute name="prevent_canonicalization_for_mic" value="false" /><attribute name="rename_digest_to_old_name" value="false" /><attribute name="remove_cms_algorithm_protection_attrib" value="false" /></partnership><partnership name="PartnerB-to-Iris"><sender name="partnerb" /><receiver name="iris" /></partnership><partnership name="iris-to-c">
+  <sender name="iris" />
+  <receiver name="c" />
+  <pollerConfig enabled="false" />
+  <attribute name="reject_unsigned_messages" value="false" />
+  <attribute name="protocol" value="as2" />
+  <attribute name="content_transfer_encoding" value="binary" />
+  <attribute name="compression_type" value="ZLIB" />
+  <attribute name="subject" value="File $attributes.filename$ sent from $sender.name$ to $receiver.name$" />
+  <attribute name="as2_url" value="http://localhost:10080" />
+  <attribute name="as2_mdn_to" value="mapeiris@hotmail.com" />
+  <attribute name="as2_mdn_options" value="signed-receipt-protocol=optional, pkcs7-signature; signed-receipt-micalg=optional, $attribute.sign$" />
+  <attribute name="encrypt" value="3DES" />
+  <attribute name="sign" value="SHA256" />
+  <attribute name="resend_max_retries" value="3" />
+  <attribute name="prevent_canonicalization_for_mic" value="false" />
+  <attribute name="rename_digest_to_old_name" value="false" />
+  <attribute name="remove_cms_algorithm_protection_attrib" value="false" />
+  <attribute name="custom_mime_headers" value="X-CustomHeader: shift-shape ; X-CustomShape: oblong" />
+  <attribute name="add_custom_mime_headers_to_http" value="true" />
+  <attribute name="custom_mime_header_names_from_filename" value="header.X-CustomRouteId,header.X-CustomCenter, junk.extraStuff" />
+  <attribute name="custom_mime_header_name_delimiters_in_filename" value="-_" />
+  <attribute name="custom_mime_header_names_from_filename" value="X-CustomRouteId,X-CustomCenter" />
+  <attribute name="custom_mime_header_names_regex_on_filename" value="([^-]*)-([^.]*).msg" />
+  <attribute name="attribute_names_from_filename" value="P-DynamicParm1,P-DynamicParm2" />
+  <attribute name="attribute_values_regex_on_filename" value="([A-Za-z]*)([^.]*).edi" />
+</partnership></partnerships>

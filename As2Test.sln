@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A3B4F81-60B8-4968-9D2E-8678A86900C4}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		..\..\..\eclipse-workspace\OpenAs2App\docs\OpenAS2HowTo.pdf = ..\..\..\eclipse-workspace\OpenAs2App\docs\OpenAS2HowTo.pdf
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OpenAS2_Database", "OpenAS2_Database\OpenAS2_Database.sqlproj", "{D2A2554E-33CB-4A46-887B-C8D679ADB843}"
